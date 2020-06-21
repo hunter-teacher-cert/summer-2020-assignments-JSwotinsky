@@ -1,0 +1,23 @@
+4.11 Exercise 1
+Jonathan Swotinsky
+
+ping() adds a period to the end of the current line, and then starts a new line.
+baffle() prints "wug" and then invokes ping().
+
+OUTPUT:
+
+No, I wug.
+You wugga wug.
+I wug.
+
+STACK DIAGRAM:
+
+main     
+zoop   
+baffle
+ping
+
+If baffle() is invoked at the end of ping(), the program gets caught in a loop printing "wug." until a StackOverflow exception is thrown.
+
+
+
