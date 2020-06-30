@@ -6,6 +6,65 @@ import java.util.*;
 // 2D Arrays
 // Jonathan Swotinsky
 
+// Task:
+//
+// Create a new java file.
+// Copy over the print2d method from today's lesson.
+// It may be useful to modify this to have three digits per printed element.
+// Write a main method where you initialize a 2d array of ints. Make it 20 x 20 (for now)
+// 
+// Write the following methods:
+//
+// public static void rowPop(int[][] d2, int r, int value)
+// Populates row r in d2 with value
+//
+// public static void colPop(int[][] d2, int c, int value)
+// Populates column c in d2 with value
+//
+// public static void invert(int[][] d2)
+// Goes through d2 and modifies each element like so:
+// All 0s should become 255
+// Any non-0 value should become 0
+// 
+// public static void diagonal(int[][]d2, int r, int c, int direction, int value)
+// Sets the diagonal starting at d2[r][c] going in direction to value
+// direction is one of the following values:
+// 0: go up and to the left
+// 1: go up and to the right
+// 2: go down and to the left
+// 3: go down and to the right
+//
+// Sketch out what this should do on a KtS, think about what programming structures you may want to use (perhaps nested for loops are not the only answer?)
+// You may be tempted to try something very clever, collapsing the direction cases together, on your first go, ignore that instinct. Start out writing it as straightforawrd as possible. Once you have that down, then you can get cute.
+// 
+// Examples (assume starting with a 10x10 array of 0s.
+// 
+// print2d(diagonal(d2, 8, 3, 0, 111)) ==>
+// 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 111 000 000 000 000 000 000 000 000 000 
+// 000 111 000 000 000 000 000 000 000 000 
+// 000 000 111 000 000 000 000 000 000 000 
+// 000 000 000 111 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 
+// print2d(diagonal(d2, 0, 5, 3, 222)) ==>
+// 
+// 000 000 000 000 000 222 000 000 000 000 
+// 000 000 000 000 000 000 222 000 000 000 
+// 000 000 000 000 000 000 000 222 000 000 
+// 000 000 000 000 000 000 000 000 222 000 
+// 000 000 000 000 000 000 000 000 000 222 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+// 000 000 000 000 000 000 000 000 000 000 
+
 public class GridImage {
 
 	public static void main(String[] args) {
