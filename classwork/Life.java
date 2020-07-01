@@ -66,9 +66,9 @@ class Life{
 	
 	public static int countNeighbors(char[][] board, int r, int c){
 		int livingNeighbors = 0;
-		for(int row = (r-1)%board.length; row <= (r-1)%board.length + 2; row++){
-			for(int col = (c-1)%board[r].length; col <= (c-1)%board[r].length + 2; col++){
-				if(board[row][col] == 'X'){
+		for(int row = (r-1); row <= (r + 1); row++){
+			for(int col = (c-1); col <= (c + 1); col++){
+				if(board[(row+25)%(board.length)][(col+25)%(board[r].length)] == 'X'){
 					livingNeighbors++;
 				} //end if		
 			} //end for col
@@ -89,17 +89,18 @@ class Life{
 		
 	public static char getNextGenCell(char[][]board, int r, int c){
 		
-		// determine if board[r][c] is living or dead
+		// If board[r][c] is living:
 		if(board[r][c] == 'X'){
-			// if living and 2 or 3 neighbords then remain alive
+			// Any live cell with 2 or 3 live neighbors survives:
 			if(countNeighbors(board,r,c) == 2 || countNeighbors(board,r,c) == 3){
 				board[r][c] = 'X';
 			} else{
 				board[r][c] = ' ';
 			}
+		// If board[r][c] is dead:
 		} else {
-			// if dead and 3 neighbors then become alive		
-			if(countNeighbors(board,r,c) == 2 || countNeighbors(board,r,c) == 3){
+			// Any dead cell with 3 live neighbors becomes a live cell:	
+			if(countNeighbors(board,r,c) == 3){
 				board[r][c] = 'X';
 			} else {
 				board[r][c] = ' ';
@@ -131,10 +132,27 @@ class Life{
 		setCell(board,5,5,'X');
 		setCell(board,5,6,'X');
 		setCell(board,5,7,'X');
-		for(int i = 0; i <= 10; i++){
-			printBoard(board);
-			generateNextGenCell(board);
-		} //end for i
+		printBoard(board);
+		System.out.println("Check");
+		System.out.println(getNextGenCell(board, 4, 5));
+		System.out.println(getNextGenCell(board, 4, 6));
+		System.out.println(getNextGenCell(board, 4, 7));
+		System.out.println(getNextGenCell(board, 5, 5));
+		System.out.println(getNextGenCell(board, 5, 6));
+		System.out.println(getNextGenCell(board, 5, 7));
+		System.out.println(getNextGenCell(board, 6, 5));
+		System.out.println(getNextGenCell(board, 6, 6));
+		System.out.println(getNextGenCell(board, 6, 7));
+		
+		//printBoard(board);
+		
+		
+		
+		
+		//for(int i = 0; i <= 10; i++){
+		//	printBoard(board);
+		//	generateNextGenCell(board);
+		//} //end for i
 	} //end main
 
 } //end class
