@@ -3,24 +3,31 @@ import java.util.*;
 
 /*
 
-2D array
+Hunter CS Program
+Game Of Life
+Jonathan Swotinsky
 
-set up array
-change values in array
+Task: 
 
-method to apply game of life rules (will the next generation be alive or not?)
+Write a program to simulate Conway's Game of Life (GOL)
+
+GOL Rules:
+Any live cell with 2 or 3 live neighbors survives.
+Any dead cell with 3 live neighbors becomes a live cell.
+All other cells become dead cells.
+
+Wrapping Approach:
+Row 24 wraps to row 0.
+Column 25 wraps to column 0.
 
 */
 
 class Life{
 
 	/*
-	
-	create a new 2D array, fill it with ' ' 
-	representing that the entire board is empty.
-	
-	*/
-	
+	Create a new 2 dimensional array, and fill it with ' ' 
+	to represent that the entire board is empty.
+	*/	
 	public static char[][] createNewBoard(int rows, int cols){
 		char[][] board = new char[rows][cols];
 		for(int r = 0; r < rows; r++){
@@ -31,6 +38,10 @@ class Life{
 		return board;
 	} //end createNewBoard
 
+	
+	/*
+	Print a given 2 dimensional array.
+	*/		
 	public static void printBoard(char[][] board){
 		for(int r = 0; r < board.length; r++){
 			for(int c = 0; c < board[r].length; c++){
@@ -43,27 +54,18 @@ class Life{
 
 
 	/*
-	
-	set the cell (r,c) to value)
-	
+	Set the value of a cell.
 	*/	
-
 	public static void setCell(char[][] board, int r, int c, char val){
 		if(r >= 0 && r <= board.length - 1 && c >= 0 && c <= board[r].length - 1){
 			board[r][c] = val;
 		} //if
 	} //end setCell
-		
+	
+	
 	/*
-	
-	Count and return the number of living neighbors around board[r][c]
-	
-	approach 1 - lots of if statements
-	approach 2 - you can loop over the grid from board[r-1][c]
-				 to board[r+1][c+1]
-	
+	Count and return the number of living cells around a given cell.
 	*/
-	
 	public static int countNeighbors(char[][] board, int r, int c){
 		int livingNeighbors = 0;
 		for(int row = (r-1); row <= (r + 1); row++){
@@ -79,14 +81,10 @@ class Life{
 		return livingNeighbors;
 	} //end countNeighbors
 		
+	
 	/*
-	
-	given a board and a cell, determine based on the rules for 
-	Conway's GOL if the cell is alive ('X') or dead(' ') in the 
-	next generation.
-	
+	Given a board and a cell, determine whether the cell is alive or dead.
 	*/
-		
 	public static char getNextGenCell(char[][]board, int r, int c){
 		// If board[r][c] is living:
 		if(board[r][c] == 'X'){
@@ -107,12 +105,10 @@ class Life{
 		}
 	} //end getNextGenCell
 	
+	
 	/*
-	
-	scan the board to generate a NEW board with the 
-	next generation
+	Generate a new board with the next generation of cells.
 	*/
-	
 	public static char[][] generateNextGenCell(char[][] board){
 		char newBoard[][] = new char[board.length][board[0].length];
 		//fill the new board
@@ -124,19 +120,28 @@ class Life{
 		return newBoard;
 	} //end generateNextGenCell
 	
+	
+	/*
+	Main
+	*/
 	public static void main(String[] args){
+		//Generate a 25 x 25 2-d array of 0's:
 		char[][] board;
 		board = createNewBoard(25,25);
+		
+		//Generate a GOL glider:
 		setCell(board,0,2,'X');
 		setCell(board,1,0,'X');
 		setCell(board,1,2,'X');
 		setCell(board,2,1,'X');
 		setCell(board,2,2,'X');
 						
-		for(int i = 0; i <= 10; i++){
+		//Run 200 iterations of Conway's GOL:
+		for(int i = 0; i <= 199; i++){
 			printBoard(board);
 			board = generateNextGenCell(board);
 		} //end for i
 	} //end main
+
 
 } //end class
