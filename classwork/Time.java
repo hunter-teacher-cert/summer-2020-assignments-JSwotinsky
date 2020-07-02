@@ -74,5 +74,11 @@ public class Time{
 		return String.format("%02d:%02d:%04.1f", this.hour, this.minute, this.second);
 	}// end toString
 
+	/*
+	Equals methods
+	*/
+	public boolean equals(Time that){
+		return this.hour == that.hour && this.minute == that.minute && this.second == that.second;
+	}// end equals
 	
 }
