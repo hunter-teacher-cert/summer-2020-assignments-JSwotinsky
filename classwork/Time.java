@@ -111,7 +111,26 @@ public class Time{
 			sum.hour += 1;
 		}
 		return sum;
-	} //end Time (instance)	
+	}// end Time (instance)	
+	
+	
+	/*
+	Method to increment time
+	*/
+	public void increment(Time t) {
+		this.hour += t.hour;
+		this.minute += t.minute;
+		this.second += t.second;
+		if (this.second >= 60.0) {
+			this.second -= 60.0;
+			this.minute += 1;
+		}
+		if (this.minute >= 60) {
+			this.minute -= 60;
+			this.hour += 1;
+		}
+	}// end increment
+	
 }// end class
 
 	
