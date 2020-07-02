@@ -1,8 +1,22 @@
 import java.io.*;
 import java.util.*;
 
+/*
+
+Hunter CS Program
+Driver and Time Class
+Jonathan Swotinsky
+
+Task: 
+1. Fetch KtS.
+2. Read Chapter 10 in ThinkJava. Note any questions/comments/concerns. This will inform discussion.
+3. Copy Time.java and Driver.java into your work repo.
+4. Read Chapter 11 in ThinkJava. Note any questions/comments/concerns. This will inform discussion.
+5. As you read Chapter 11, fill in your Time class in Time.java. Grow it incrementally, testing as you go.
+
+*/
+
 public class Time{
-	// your time class code goes in here
 	private int hour;
 	private int minute;
 	private double second;	
