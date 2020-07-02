@@ -63,7 +63,7 @@ public class Time{
 
 	
 	public void printTime2(){
-		System.out.printf("%02d:%02d:%04.1f\n",hour,minute,second);
+		System.out.printf("%02d:%02d:%04.1f\n",this.hour,this.minute,this.second);
 	}// end printTime
 	
 	
@@ -81,4 +81,38 @@ public class Time{
 		return this.hour == that.hour && this.minute == that.minute && this.second == that.second;
 	}// end equals
 	
-}
+	
+	/*
+	Static add method.  Note: This method is overloaded
+	*/
+	public static Time add(Time t1, Time t2) {
+		Time sum = new Time();
+		sum.hour = t1.hour + t2.hour;
+		sum.minute = t1.minute + t2.minute;
+		sum.second = t1.second + t2.second;
+		return sum;
+	} //end Time (static)
+
+	
+	/*
+	Instance add method.  Note: This method is overloaded
+	*/
+	public Time add(Time t) {
+		Time sum = new Time();
+		sum.hour = this.hour + t.hour;
+		sum.minute = this.minute + t.minute;
+		sum.second = this.second + t.second;
+		if (sum.second >= 60.0) {
+			sum.second -= 60.0;
+			sum.minute += 1;
+		}
+		if (sum.minute >= 60) {
+			sum.minute -= 60;
+			sum.hour += 1;
+		}
+		return sum;
+	} //end Time (instance)	
+}// end class
+
+	
+
