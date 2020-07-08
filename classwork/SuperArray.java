@@ -39,6 +39,24 @@ pubic int get(int index) - return the value at location index from the array. If
 public boolean isEmpty() - return True if ther are no elemets in the internal array, false otherwise.
 public String toString() - build and return a String with all the elements of the array in a printable form
 
+Codew Challenge 3: Add and test the following methods to SuperArray
+
+public void grow() - This should increase the capacity of your SuperArray: 
+Make a new array with extra room.
+Copy the data from the original internal array over to the new one.
+Set the internal instance variable data to the new array.
+
+public void add(int value) - Modify the add routine you wrote above. 
+Now, if there is no room at the end of the array it should call grow().
+
+public void add(int index, int value) - This is a second version of add it will add an element at location index. 
+If index is past the end of the array, do nothing. 
+Otherwise, shift down all the elements past index to create room and then insert value into the correct location. 
+Don’t forget to grow the array as in the previous question if necessary.
+
+public void remove(int index) - delete the element at location index from the array. Don’t forget to shift down elements to remove the open space.
+
+
 */
 
 
@@ -46,62 +64,131 @@ public String toString() - build and return a String with all the elements of th
 
 UML Diagram:
 
--------------------------
-SuperArray
--------------------------
-- data: int[]
-- numberElements: int
--------------------------
-+ constructor
-+ constructor: int 
-+ printArray
-+ getSize
-+ append: int
-+ add: int
-+ get: int
-+ isEmpty: boolean
-+ toString: String
--------------------------
+ ---------------------------
+| SuperArray             	|
+|---------------------------|
+| - data: int[]            	|
+| - numberElements: int		|
+|---------------------------|
+| + constructor()			|
+| + constructor(int) 		|
+| + add(int): void			|
+| + add(int, int): void		|
+| + remove(int): void		|
+| + get(int): int			|
+| + isEmpty(): boolean		|
+| + toString(): String		|
+| - grow(): void			|
+| + printArray(): void		|
+ ---------------------------
 
 */
 
 public class SuperArray{
+	
+	////////////////////Instance Variables////////////////////
+	
 	private int[] data;
 	private int numberElements;
 	
 	
+	////////////////////Constructors////////////////////
+	
 	public SuperArray(){
-		this.numberElements = 10;
-		this.data = new int[this.numberElements];
-	}// end constructor without parameters
+		this.data = new int[10];
+		this.numberElements = 0;	
+	}// end constructor 
 	
 	
 	public SuperArray(int n){
-		this.numberElements = n;
-		this.data = new int[this.numberElements];
-	}// end constructor with
+		this.numberElements = 0;
+		this.data = new int[n];
+	}// end constructor with array size parameter
 	
 	
-	public void append(int n){
+	////////////////////Methods////////////////////
+	
+	public void add(int value){
+		if(this.numberElements == this.data.length){
+			this.grow();
+			this.data[this.numberElements] = value;
+			this.numberElements++;
+		} else {
+			this.data[this.numberElements] = value;
+			this.numberElements++;
+		}// end if else
+	}// end add with value parameter
+
+	
+	public void add(int index, int value){
+		//If the index is past the end of the array, do nothing.
+		if(index > this.numberElements - 1){
+			return;
+		} else {
+			// If the array is full, increase the length of the array by 1 before shifting.
+			if(this.numberElements == this.data.length){
+				this.grow();
+			}// end nested if
+		
+			// Shift all elements to make room for the new value.
+			for(int i = this.numberElements - 1; i >= index; i--){
+				this.data[i+1] = this.data[i];		
+			}//end for i
+			this.data[index] = value;
+			this.numberElements++;
+		} // end if else	
+	}// end add with index and value parameters
+		
+		
+	public void remove(int index){
+		//If the index is past the end of the array, do nothing.
+		if(index > numberElements - 1){
+			return;
+		} else {
+			for(int i = index; i <= this.numberElements - 2; i++){
+				this.data[i] = this.data[i+1];		
+			}// end for i
+			this.numberElements--;
+		} // end if else	
+	}// end remove
+	
+	
+	public int get(int index){
+		if(index > this.numberElements - 1){
+			return -1;
+		} else {
+			return this.data[index];
+		}// end if else
+	}// end get
+
+
+	public boolean isEmpty(){
+		return (this.numberElements == 0);
+	}// end isEmpty
+	
+	
+	public String toString(){
+		if(this.numberElements > 0){ 
+			String s = "" + this.data[0];
+			for(int i = 1; i <= this.numberElements - 1; i++){
+				s = s + ", " + this.data[i];
+			}// end for i
+			return s;
+		} else {
+			return "";
+		}// end if else
+	}// end toString
+	
+	
+	private void grow(){
 		int[] newArray = new int[this.data.length + 1];
 		for (int i = 0; i < this.data.length; i++){
 			newArray[i] = this.data[i];
 		}// end for i
-		newArray[newArray.length - 1] = n;
 		this.data = newArray;
-	}// end append
+	}// end grow
 	
 	
-	public void add(int n){
-		for (int i = 0; i < this.data.length; i++){
-			if (this.data[i] == 0){
-				this.data[i] = n;
-				return;
-			}// if
-		}// end for i
-	}// end add
-	
-		
 	public void printArray(){
 		
 		for(int i = 0; i < this.data.length; i++){
@@ -112,31 +199,106 @@ public class SuperArray{
 	}// end printArray
 
 	
-	public int getSize(){
-		return this.numberElements;
-	}// end getSize
-	
-	
 	public static void main(String[] args){
-		SuperArray object1 = new SuperArray();
-		SuperArray object2 = new SuperArray(5);
+		SuperArray object1 = new SuperArray(4);
+		SuperArray object2 = new SuperArray();
+		
+		//Test for constructor methods:
+		System.out.println("\nTest for constructor methods:");
+		System.out.print("Object 1:\t");
 		object1.printArray();
+		System.out.print("Object 2:\t");
 		object2.printArray();
-		System.out.println(object1.getSize());
-		System.out.println(object2.getSize());
-		object2.add(1);
-		object2.add(0);
-		object2.add(2);
-		object2.add(3);
-		object2.add(4);
-		object2.add(5);
-		object2.add(6);
-		object2.printArray();
-		object1.append(1);
+		System.out.println();
+		
+		//Test for add method (without grow):
+		System.out.println("Test for add method (without grow):");
+		object1.add(1);
+		object1.add(2);
+		object1.add(3);
+		System.out.print("Object 1:\t");
 		object1.printArray();
+		System.out.print("Object 2:\t");
+		object2.printArray();
+		System.out.println();
+
+		//Test for get method:
+		System.out.println("Test for get method:");
+		int position = 2;
+		System.out.printf("Object 1, Position %d:\t",position);
+		System.out.println(object1.get(position));
+		position = 3;
+		System.out.printf("Object 1, Position %d:\t",position);
+		System.out.println(object1.get(position));
+		System.out.println();
+				
+		//Test for isEmpty method:
+		System.out.println("Test for isEmpty method:");
+		System.out.print("Object 1:\t");
+		System.out.println(object1.isEmpty());
+		System.out.print("Object 2:\t");
+		System.out.println(object2.isEmpty());
+		System.out.println();
+		
+		//Test for toString method:
+		System.out.println("Test for toString method:");
+		System.out.print("Object 1:\t");
+		System.out.println(object1.toString());
+		System.out.print("Object 2:\t");
+		System.out.println(object2.toString());
+		System.out.println();
+		
+		//Test for grow method:
+		System.out.println("Test for grow method:");
+		System.out.print("Object 1 before grow:\t");
+		object1.printArray();
+		object1.grow();
+		System.out.print("Object 1 after grow:\t");
+		object1.printArray();
+		System.out.println();
+		
+		//Test for add (with grow):
+		System.out.println("Test for add method (with grow):");
+		System.out.print("Object 1 before add:\t");
+		object1.printArray();
+		object1.add(4);
+		object1.add(5);
+		System.out.print("Object after add (grow not required):\t");
+		object1.printArray();
+		object1.add(6);
+		System.out.print("Object after add (grow required):\t");
+		object1.printArray();
+		System.out.println();
+		
+		//Test for add method at index (with and without grow required):		
+		System.out.println("Test for add method at index (with and without grow required):");
+		System.out.print("Object 2 before add:\t");
+		object2.printArray();
+		for(int i = 0; i<= 8; i++){
+			object2.add(i);
+		}// end for i
+		System.out.print("Object 2 with all but one position filled:\t");
+		object2.printArray();
+		object2.add(3,99);
+		System.out.print("Object 2 after add at index (grow not required):\t");
+		object2.printArray();
+		object2.add(3,98);
+		System.out.print("Object 2 after add at index (grow required):\t");
+		object2.printArray();
+		System.out.println();		
+			
+		//Test for remove method:
+		System.out.println("Test for remove method:");
+		System.out.print("Object 1 before remove:\t");
+		object1.printArray();
+		object1.remove(3);
+		System.out.print("Object 1 after remove (including insignifcant elements):\t");
+		object1.printArray();
+		System.out.print("Object 1 after remove (including significant elements only):\t");
+		System.out.println(object1.toString());
+		System.out.println();
 		
 	}// end main
-	
 	
 }// end SuperArray
 
