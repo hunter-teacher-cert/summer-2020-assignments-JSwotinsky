@@ -20,15 +20,34 @@ public class MyStackDriver {
 
 	MyStack stack = new MyStack();
 	
+	// Test MyStack() constructor:
+	System.out.println("\nTest for MyStack() constructor:");
 	System.out.println(stack);
+	System.out.println();
 	
-	stack.push("a");
-	stack.push("b");
+	// Test for MyStack push() method:
+	System.out.println("Test for MyStack() push() method:");
+	stack.push("f");
+	stack.push("e");
+	stack.push("d");
 	stack.push("c");
-	
+	stack.push("b");
+	stack.push("a");
 	System.out.println(stack);
-	
+	System.out.println();
 
+	// Test for MyStack pop() method:
+	System.out.println("Test for MyStack() pop() method:");
+	System.out.println("Current state of stack: " + stack);
+	String s = stack.pop();
+	System.out.println("Stack state after pop(): " + stack + "\t" + "Element returned: " + s);
+	System.out.println();
+	
+	
+	
+	
+	
+	
 	}// end main
 	
 }// end class MyStackDriver
