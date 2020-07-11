@@ -53,15 +53,15 @@ public class MyStack {
 	
 	public void push(String data){
 		// Push data onto the stack.
-		this.addFront(data);		
+		stack.addFront(data);		
     }// end push
 
 
     public String pop(){
 		// Store the first element in the stack in a variable.
-		String s = this.get(0);
+		String s = stack.get(0);
 		// Remove the first element from the stack.
-        this.remove(0);
+        stack.remove(0);
 		// Return the first element.
 		return s;
     }// end pop
@@ -69,24 +69,24 @@ public class MyStack {
 
     public String top(){
 		// Return the first element in the stack but do now remove it.
-		return this.get(0);
+		return stack.get(0);
 	}// end top
 
 
 	public boolean isEmpty(){
 		// Return true if the stack has no data.  Otherwise, return false.
-		return this.getLength() == 0;
+		return stack.getLength() == 0;
 	 }// end isEmpty
 
 
 	public int size(){
 		// Return the number of items in the stack.
-		return this.getLength();	
+		return stack.getLength();	
 	}// end size
 
 
 	public String toString(){
-		return this.toString();
+		return stack.toString();
 	}// end toString
 
 }// end myStack class

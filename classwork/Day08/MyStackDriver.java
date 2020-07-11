@@ -19,14 +19,15 @@ public class MyStackDriver {
 	public static void main(String[] args) {
 
 	MyStack stack = new MyStack();
-
-	System.out.println(stack.toString());
+	
+	System.out.println(stack);
 	
 	stack.push("a");
 	stack.push("b");
 	stack.push("c");
 	
-	System.out.println(stack.toString());
+	System.out.println(stack);
+	
 
 	}// end main
 	
