@@ -96,6 +96,10 @@ public class LList{
     
 	////////////////////Methods////////////////////
 	
+	public int getLength(){
+		return this.length;
+	}// end getLength
+	
 	public String toString(){
 		String s = "";
 		Node tmp = head; // tmp and head are now aliases.

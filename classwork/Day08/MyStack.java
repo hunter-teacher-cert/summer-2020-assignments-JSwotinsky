@@ -44,8 +44,8 @@ public class MyStack {
     
 	////////////////////Constructors////////////////////
 	
-	public StackList(){
-		this.stack = LList();
+	public MyStack(){
+		this.stack = new LList();
     }// end constructor
 
     
@@ -53,15 +53,15 @@ public class MyStack {
 	
 	public void push(String data){
 		// Push data onto the stack.
-		stack.addFront(data);		
+		this.addFront(data);		
     }// end push
 
 
     public String pop(){
 		// Store the first element in the stack in a variable.
-		String s = stack.get(0);
+		String s = this.get(0);
 		// Remove the first element from the stack.
-        stack.remove(0);
+        this.remove(0);
 		// Return the first element.
 		return s;
     }// end pop
@@ -69,19 +69,24 @@ public class MyStack {
 
     public String top(){
 		// Return the first element in the stack but do now remove it.
-		return stack.get(0);
+		return this.get(0);
 	}// end top
 
 
 	public boolean isEmpty(){
 		// Return true if the stack has no data.  Otherwise, return false.
-		return stack.length == 0;
+		return this.getLength() == 0;
 	 }// end isEmpty
 
 
 	public int size(){
 		// Return the number of items in the stack.
-		return stack.length;	
+		return this.getLength();	
 	}// end size
+
+
+	public String toString(){
+		return this.toString();
+	}// end toString
 
 }// end myStack class
