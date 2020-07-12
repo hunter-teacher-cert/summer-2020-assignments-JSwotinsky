@@ -33,6 +33,24 @@ public class MyStackDriver {
 	System.out.println("Test 1 for MyStack() isEmpty() method: " + "\t" + stack.isEmpty() + "\n");
 	
 	
+	// Test for IndexOutOfBoundsException() in pop() method.
+	/*
+	stack.pop();
+	*/
+	
+	
+	// Test for IndexOutOfBoundsException() in top() method.
+	/*
+	stack.top();
+	*/
+	
+	
+	// Test for IllegalArgumentException() in push() method, inherited from addFront() method in LList() class.
+	/*
+	stack.push(null);
+	*/
+	
+	
 	// Test for MyStack push() method:
 	System.out.println("Test for MyStack() push() method:");
 	stack.push("f");
@@ -73,6 +91,7 @@ public class MyStackDriver {
 	System.out.println("Test for MyStack() top() method:");
 	System.out.println("Current state of stack: " + stack + "\t" + "Top element in stack: " + stack.top());
 	System.out.println();
+	
 	
 	}// end main
 	

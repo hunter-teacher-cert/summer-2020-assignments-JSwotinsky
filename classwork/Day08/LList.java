@@ -113,6 +113,10 @@ public class LList{
 	
 		
 	public void addFront(String data){		
+		// If the value of data in a node is set to null, throw an illegal argument exception.
+		if (data == null){
+			throw new IllegalArgumentException("Name variable cannot be set to null!");
+		}// exception
 		// Create a new node and populate it with a name.
 		Node newNode = new Node(data);
 		// Point the new node to head.
@@ -229,7 +233,6 @@ public class LList{
 		if(index == 0){
 			//Remove the first node.
 			head = tmp.getNext();
-			System.out.println(length);
 			length--;
 			return;
 		} else {

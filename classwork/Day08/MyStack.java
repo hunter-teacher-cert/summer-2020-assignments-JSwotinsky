@@ -31,7 +31,7 @@ You should also write a driver file that tests the features of MyStack.
 For the previous few assignments, we've provided a Driver file with specific tests. 
 When developing your driver, try to keep it small, just large enough to ensure you've testing the functionality of your stack well.
 
-Make sensible decision for situations that could result in an error and feel free to add methods as needed.
+Make sensible decisions for situations that could result in an error and feel free to add methods as needed.
 
 */
 
@@ -58,6 +58,10 @@ public class MyStack {
 
 
     public String pop(){
+		// If the stack is empty throw an IndexOutOfBoundsException with the message "No Element to Pop.".
+		if(stack.getLength() == 0){
+			throw new IndexOutOfBoundsException("No Element to Pop.");
+		}// end exception
 		// Store the first element in the stack in a variable.
 		String s = stack.get(0);
 		// Remove the first element from the stack.
@@ -68,6 +72,10 @@ public class MyStack {
 
 
     public String top(){
+		// If the stack is empty throw an IndexOutOfBoundsException with the message "Stack Empty.".
+		if(stack.getLength() == 0){
+			throw new IndexOutOfBoundsException("Stack Empty.");
+		}// end exception
 		// Return the first element in the stack but do now remove it.
 		return stack.get(0);
 	}// end top
@@ -88,5 +96,6 @@ public class MyStack {
 	public String toString(){
 		return stack.toString();
 	}// end toString
+
 
 }// end myStack class
