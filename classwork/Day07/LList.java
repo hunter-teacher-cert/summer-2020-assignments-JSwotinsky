@@ -150,33 +150,37 @@ public class LList{
 
 	public String get(int index){
 		Node tmp = head;
+		//  If the LList is empty, or if the index is less than 0, throw an IndexOutOfBoundsException.
+		if (length == 0 || index < 0){
+			throw new IndexOutOfBoundsException();
+		}// exception
 		// Traverse through LList until the index has been reached.
 		while(index != 0){
-			// If the last element of LList is reached before the index has been reached, return null.
+			// If the last element of LList is reached before the index has been reached, throw an IndexOutOfBoundsException.
 			if(tmp.getNext() == null){
-				return null;
-				
-				//Instead of return null, throw an index out of bounds exception here.
-				
-				
+				throw new IndexOutOfBoundsException();			
 			// Otherwise, move forward to the next element in the LList and decrement the index by 1.
 			} else {
 				tmp = tmp.getNext();
 				index--;
 			}// end if else
 		}// end while
-		//Return the value of data at the index.
+		// Return the value of data at the index.
 		return tmp.getData();
 	}// end get
 	
 
 	public void set(int index, String value){
 		Node tmp = head;
+		//  If the LList is empty, or if the index is less than 0, throw an IndexOutOfBoundsException.
+		if (length == 0 || index < 0){
+			throw new IndexOutOfBoundsException();
+		}// exception
 		// Traverse through LList until the index has been reached.
 		while(index != 0){
-			// If the last element of LList is reached before the index has been reached, return null.
+			// If the last element of LList is reached before the index has been reached, throw an IndexOutOfBoundsException.
 			if(tmp.getNext() == null){
-				return;
+				throw new IndexOutOfBoundsException();
 			// Otherwise, move forward to the next element in the LList and decrement the index by 1.
 			} else {
 				tmp = tmp.getNext();
@@ -190,16 +194,15 @@ public class LList{
 	
 	public void insert(int index, String value){
 		Node tmp = head;
-		// If the index is 0, add a new node to the front of LList.
-		if (index == 0){
-			addFront(value);
-			return;
+		//  If the LList is empty, or if the index is less than 0, throw an IndexOutOfBoundsException.
+		if (length == 0 || index < 0){
+			throw new IndexOutOfBoundsException();
 		} else {
 			// Traverse through LList until the index has been reached.
-			while(index != 1){
-				// If the last element of LList is reached before the index has been reached, return null.
+			while(index != 0){
+				// If the last element of LList is reached before the index has been reached, throw IndexOutOfBoundsException.
 				if(tmp.getNext() == null){
-					return;
+					throw new IndexOutOfBoundsException();
 				// Otherwise, move forward to the next element in LList and decrement the index by 1.
 				} else {
 					tmp = tmp.getNext();
@@ -241,18 +244,17 @@ public class LList{
 			return index;
 		// If the key is not located in the last element, return -1.
 		} else {
-			return -1;	
-		
-			
-			// Throw no such element exception here.	
-		
-		
+			throw new NoSuchElementException();			
 		}// end if else
 	}// end search
 
 
     public void remove(int index){
 		Node tmp = head;
+		//  If the LList is empty, or if the index is less than 0, throw an IndexOutOfBoundsException.
+		if (length == 0 || index < 0){
+			throw new IndexOutOfBoundsException();
+		}// exception
 		// If the index is zero, remove the first node.
 		if(index == 0){
 			//Remove the first node.
@@ -261,9 +263,9 @@ public class LList{
 		} else {
 			// Traverse through LList until the element before the index has been reached.
 			while(index != 1){
-				// If the last element of LList is reached before the index has been reached, return null.
+				// If the last element of LList is reached before the index has been reached, throw an IndexOutOfBoundsException.
 				if(tmp.getNext() == null){
-					return;
+					throw new IndexOutOfBoundsException();
 				// Move forward to the next element in LList and decrement the index by 1.
 				} else {
 					tmp = tmp.getNext();
