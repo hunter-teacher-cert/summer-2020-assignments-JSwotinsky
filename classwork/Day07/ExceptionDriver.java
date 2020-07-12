@@ -51,7 +51,7 @@ public class ExceptionDriver {
 		
 		//Test for IllegalArgumentException():
 		
-		System.out.println("\nTest for IllegalArgumentException("Name cannot be set to null):\n");
+		System.out.println("\nTest for IllegalArgumentException():\n");
 		LList g = new LList();
 		System.out.print("Adding \"No Problem!\" to LList: \t");
 		g.addFront("No Problem!");

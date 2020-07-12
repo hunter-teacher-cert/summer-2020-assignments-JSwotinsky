@@ -129,7 +129,7 @@ public class LList{
 		
 		// If the value of data in a node is set to null, throw an illegal argument exception.
 		if (data == null){
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Name variable cannot be set to null!");
 		}// exception
 		
 		// Create a new node and populate it with a name.
