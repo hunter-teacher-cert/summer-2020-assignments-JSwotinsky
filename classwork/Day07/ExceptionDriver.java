@@ -50,7 +50,8 @@ public class ExceptionDriver {
 		
 		
 		//Test for IllegalArgumentException():
-		/*System.out.println("\nTest for IllegalArgumentException():\n");
+		
+		System.out.println("\nTest for IllegalArgumentException("Name cannot be set to null):\n");
 		LList g = new LList();
 		System.out.print("Adding \"No Problem!\" to LList: \t");
 		g.addFront("No Problem!");
@@ -58,7 +59,7 @@ public class ExceptionDriver {
 		System.out.print("\nAdding null to LList: \t");
 		g.addFront(null); // This line will throw the exception that has been written in the addFront() method of the LList() class.
 		System.out.println(g);
-		*/
+		
 		
 		
 		//Test for IndexOutOfBoundsException() in get() method:
