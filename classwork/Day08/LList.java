@@ -229,6 +229,8 @@ public class LList{
 		if(index == 0){
 			//Remove the first node.
 			head = tmp.getNext();
+			System.out.println(length);
+			length--;
 			return;
 		} else {
 			// Traverse through LList until the element before the index has been reached.
