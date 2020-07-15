@@ -53,7 +53,7 @@ public class Boogle{
 			int midPoint = (checkTo + checkFrom) / 2;
 					
 			// If the midpoint is the target, return its index:
-			if (target == a.get(midPoint)){
+			if (target == (int)a.get(midPoint)){
 				return midPoint;
 			// If the midpoint is not the target, check whether the target is less than the
 			// midpoint or greater than the midpoint, adjust checkFrom and checkTo accordingly,
@@ -61,7 +61,7 @@ public class Boogle{
 			} else if (target < (int)a.get(midPoint)){
 				int newCheckFrom = checkFrom;
 				int newCheckTo = midPoint - 1; 
-				binSearch(a, target, checkFrom, checkTo);		
+				return binSearch(a, target, newCheckFrom, newCheckTo);		
 			} else {
 				int newCheckFrom = midPoint + 1;
 				int newCheckTo = checkTo; 
@@ -70,7 +70,7 @@ public class Boogle{
 		
 		}// end while
 	
-			if(target == a.get(checkFrom)){
+			if(target == (int)a.get(checkFrom)){
 				return checkFrom;
 			} else {
 				return -1; 
@@ -88,7 +88,7 @@ public class Boogle{
 			int midPoint = (checkTo + checkFrom) / 2;
 		
 			// If the midpoint is the target, return its index:
-			if (target == a.get(midPoint)){
+			if (target == (int)a.get(midPoint)){
 				return midPoint;
 			// If the midpoint is not the target, check whether the target is less than the
 			// midpoint or greater than the midpoint, adjust checkFrom and checkTo accordingly,
@@ -96,7 +96,7 @@ public class Boogle{
 			} else if (target < (int)a.get(midPoint)){
 				int newCheckFrom = checkFrom;
 				int newCheckTo = midPoint - 1; 
-				binSearch(a, target, checkFrom, checkTo);		
+				return binSearch(a, target, newCheckFrom, newCheckTo);		
 			} else {
 				int newCheckFrom = midPoint + 1;
 				int newCheckTo = checkTo; 
@@ -105,7 +105,7 @@ public class Boogle{
 		
 		}// end while
 	
-			if(target == a.get(checkFrom)){
+			if(target == (int)a.get(checkFrom)){
 				return checkFrom;
 			} else {
 				return -1; 
@@ -236,11 +236,11 @@ public class Boogle{
 		a.add(24);
 		a.add(25);
 		System.out.println(a);
-		//System.out.println(binSearch(a,2));
-		//System.out.println(binSearch(a,3));
-		//System.out.println(binSearch(a,5));
-		//System.out.println(binSearch(a,10));
-		//System.out.println(binSearch(a,11));
+		System.out.println(binSearch(a,2));
+		System.out.println(binSearch(a,3));
+		System.out.println(binSearch(a,5));
+		System.out.println(binSearch(a,10));
+		System.out.println(binSearch(a,11));
 		System.out.println(binSearch(a,19));
 		System.out.println(binSearch(a,23));
 		System.out.println(binSearch(a,24));
