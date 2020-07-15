@@ -31,6 +31,7 @@ public class MySort{
 	
 	
 	//Return the index of the minimum value in an ArrayList (overloaded to include an initial search index):
+	// (looks at region from initialIndex to end of array)
 	public static int findMin(ArrayList a, int initialIndex){
 		int min = (int)a.get(initialIndex);
 		int index = initialIndex;
