@@ -6,6 +6,7 @@ Jonathan Swotinsky
 
 Task:
 Complete the assignment below.
+(Write a method for binSearch)
 
 */
 
@@ -157,6 +158,21 @@ public class Boogle{
 
 
 	public static void main( String[] args ){
+		
+		// Test for binSearch() method:
+		System.out.println("\nTest for binSearch() method:");
+		int[] myArray = {2,5,8,9,13,15,17,19,27,82};
+		ArrayList<Integer> a = new ArrayList<Integer>();
+		for(int i = 0; i <= myArray.length - 1; i++){
+			a.add(myArray[i]);
+		}// for i
+		System.out.println("ArrayList:\t" + a);
+		
+		for(int i = 0; i <= myArray.length - 1; i++){ 
+			System.out.println("Search for " + myArray[i] + ":\t Position " + binSearch(a,myArray[i]));
+		}// for i
+		
+		
 		/*~~~~v~~~~~~move~me~down~~~1~block~at~a~time~~~~~~~~~~v~~~~
 		System.out.println("\n"+"al000"+":");
 		ArrayList al000 = prestoArrayListo(0,0,0);
@@ -224,27 +240,7 @@ public class Boogle{
 		System.out.println(linSearch(al, ));
 		System.out.println(binSearch(al, ));
 		*/
-	
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		a.add(2);
-		a.add(3);
-		a.add(5);
-		a.add(10);
-		a.add(11);
-		a.add(19);
-		a.add(23);
-		a.add(24);
-		a.add(25);
-		System.out.println(a);
-		System.out.println(binSearch(a,2));
-		System.out.println(binSearch(a,3));
-		System.out.println(binSearch(a,5));
-		System.out.println(binSearch(a,10));
-		System.out.println(binSearch(a,11));
-		System.out.println(binSearch(a,19));
-		System.out.println(binSearch(a,23));
-		System.out.println(binSearch(a,24));
-		System.out.println(binSearch(a,25));
+
 
 	}//end main
 
