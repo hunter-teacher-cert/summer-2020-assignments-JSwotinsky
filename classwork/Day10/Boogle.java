@@ -43,16 +43,14 @@ public class Boogle{
 
 	//return index of target, or -1 if not found:
 	public static int binSearch(ArrayList a, Integer target){
-		int checkFrom;
-		int checkTo;
+		int checkFrom = 0;
+		int checkTo = a.size()-1;
 		
 		//While a has at least two elements, run the following code:		
-		while(a.size() > 1){
+		while(checkTo - checkFrom > 0){
 		
 			// Find an approximate midpoint of the section of a being searched:
-			checkFrom = 0;
-			checkTo = a.size();
-			int midPoint = (checkFrom - checkTo) / 2;
+			int midPoint = (checkTo + checkFrom) / 2;
 					
 			// If the midpoint is the target, return its index:
 			if (target == a.get(midPoint)){
@@ -60,14 +58,14 @@ public class Boogle{
 			// If the midpoint is not the target, check whether the target is less than the
 			// midpoint or greater than the midpoint, adjust checkFrom and checkTo accordingly,
 			// and invoke binSearch recursively using the new values of checkFrom and checkTo: 
-			} else if (target < a.get(midPoint)){
+			} else if (target < (int)a.get(midPoint)){
 				int newCheckFrom = checkFrom;
 				int newCheckTo = midPoint - 1; 
 				binSearch(a, target, checkFrom, checkTo);		
 			} else {
 				int newCheckFrom = midPoint + 1;
 				int newCheckTo = checkTo; 
-				binSearch(a, target, checkFrom, checkTo);			
+				return binSearch(a, target, newCheckFrom, newCheckTo);			
 			}// end if else
 		
 		}// end while
@@ -84,10 +82,10 @@ public class Boogle{
 	//return index of target, or -1 if not found:
 	public static int binSearch(ArrayList a, Integer target, int checkFrom, int checkTo){
 		//While a has at least two elements, run the following code:
-		while(a.size() > 1){
+		while(checkTo - checkFrom > 0){
 		
 			// Find an approximate midpoint of the section of a being searched:
-			int midPoint = (checkFrom - checkTo) / 2;
+			int midPoint = (checkTo + checkFrom) / 2;
 		
 			// If the midpoint is the target, return its index:
 			if (target == a.get(midPoint)){
@@ -95,14 +93,14 @@ public class Boogle{
 			// If the midpoint is not the target, check whether the target is less than the
 			// midpoint or greater than the midpoint, adjust checkFrom and checkTo accordingly,
 			// and invoke binSearch recursively using the new values of checkFrom and checkTo: 
-			} else if (target < a.get(midPoint)){
+			} else if (target < (int)a.get(midPoint)){
 				int newCheckFrom = checkFrom;
 				int newCheckTo = midPoint - 1; 
 				binSearch(a, target, checkFrom, checkTo);		
 			} else {
 				int newCheckFrom = midPoint + 1;
 				int newCheckTo = checkTo; 
-				binSearch(a, target, checkFrom, checkTo);			
+				return binSearch(a, target, newCheckFrom, newCheckTo);			
 			}// end if else
 		
 		}// end while
@@ -238,6 +236,15 @@ public class Boogle{
 		a.add(24);
 		a.add(25);
 		System.out.println(a);
+		//System.out.println(binSearch(a,2));
+		//System.out.println(binSearch(a,3));
+		//System.out.println(binSearch(a,5));
+		//System.out.println(binSearch(a,10));
+		//System.out.println(binSearch(a,11));
+		System.out.println(binSearch(a,19));
+		System.out.println(binSearch(a,23));
+		System.out.println(binSearch(a,24));
+		System.out.println(binSearch(a,25));
 
 	}//end main
 
