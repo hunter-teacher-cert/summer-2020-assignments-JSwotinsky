@@ -172,7 +172,7 @@ public class Boogle{
 			System.out.println("Search for " + myArray[i] + ":\t Position " + binSearch(a,myArray[i]));
 		}// for i
 		
-		
+				
 		/*~~~~v~~~~~~move~me~down~~~1~block~at~a~time~~~~~~~~~~v~~~~
 		System.out.println("\n"+"al000"+":");
 		ArrayList al000 = prestoArrayListo(0,0,0);
