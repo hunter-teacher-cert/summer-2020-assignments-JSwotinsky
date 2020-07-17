@@ -16,6 +16,8 @@ Tasks:
 
 public class MySort{
 	
+	static int counter;
+	
 	//Return the index of the minimum value in an ArrayList:
 	public static int findMin(ArrayList a){
 		int min = (int)a.get(0);
@@ -24,6 +26,7 @@ public class MySort{
 			if((int)a.get(i) < min){
 				min = (int)a.get(i);
 				index = i;
+				counter++;
 			}// end if
 		}// end for i
 	return index;	
@@ -38,6 +41,7 @@ public class MySort{
 			if((int)a.get(i) < min){
 				min = (int)a.get(i);
 				index = i;
+				counter++;
 			}// end if
 		}// end for i
 	return index;	
@@ -46,6 +50,7 @@ public class MySort{
 	
 	//Sort an array list from the least element to the greatest element:
 	public static void sort(ArrayList a){
+		counter = 0;
 		// Find the mimimum value, swap it with the first value, remove the first value from the search range, and repeat:
 		for(int i = 0; i <= a.size() - 1; i++){
 			// Swap the first value in the search range with the minimum value in the search range:
@@ -59,6 +64,7 @@ public class MySort{
 			a.set(i,min);
 			// Replace the minimum value in the search range with the value stored in tmp:
 			a.set(minIndex,first);
+			counter++;
 		}// end for i
 	}// end sort
 	
@@ -171,6 +177,18 @@ public class MySort{
 		System.out.println("ArrayList2 (unsorted): \t" + a2);
 		sort(a2);
 		System.out.println("ArrayList2 (sorted): \t" + a2);
+		
+		ArrayList<Integer> a3 = new ArrayList<Integer>();
+		for(int i = 10; i >= 0; i--){
+			a3.add(i);
+		}
+		
+		long start = System.currentTimeMillis();
+		sort(a3);
+		long end = System.currentTimeMillis();
+		System.out.println(end - start);
+		//System.out.println(counter);		
+		
 
 	}//end main
 
