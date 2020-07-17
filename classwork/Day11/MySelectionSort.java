@@ -14,7 +14,7 @@ Tasks:
 */
 
 
-public class MySort{
+public class MySelectionSort{
 	
 	static int counter;
 	
