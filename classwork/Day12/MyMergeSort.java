@@ -8,8 +8,8 @@ MyMergeSort Class
 Jonathan Swotinsky
 
 Tasks:
--Write a method to find the minimum element in an ArrayList
--Write a method to sort an ArrayList
+-Write a slice method.
+-Write a merge method.
 
 */
 
