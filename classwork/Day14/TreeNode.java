@@ -17,29 +17,29 @@ public class TreeNode{
 	
 	////////////////////Instance Variables////////////////////
 	
-	private String name;
+	private int value;
 	private TreeNode nextLeft;
 	private TreeNode nextRight;
 	
 	
 	////////////////////Constructors////////////////////
 	
-	public TreeNode(String data, TreeNode nextLeft, TreeNode nextRight){
-		this.name = data;
+	public TreeNode(int value, TreeNode nextLeft, TreeNode nextRight){
+		this.value = value;
 		this.nextLeft = nextLeft;
 		this.nextRight = nextRight;
 	}// end constructor with data and next parameters
 	
 	
-	public TreeNode(String data){
-		this.name = data;
+	public TreeNode(int value){
+		this.value = value;
 		this.nextLeft = null;
 		this.nextRight = null;
 	}// end constructor with data parameter only
 	
 	
 	public TreeNode(){
-		this.name = "";
+		this.value = 0;
 		this.nextLeft = null;
 		this.nextRight = null;
 	}// end constructor with no parameters
@@ -47,9 +47,9 @@ public class TreeNode{
 	
 	////////////////////Methods////////////////////
 	
-	public void setData(String data){
-		this.name = data;
-	}// end setData
+	public void setValue(int value){
+		this.value = value;
+	}// end setValue
 	
 	
 	public void setNextLeft(TreeNode nextLeft){
@@ -62,9 +62,9 @@ public class TreeNode{
 	}// end setNextRight
 	
 	
-	public String getData(){
-		return this.name;		
-	}// end getData
+	public int getValue(){
+		return this.value;		
+	}// end getValue
 
 
 	public TreeNode getNextLeft(){
@@ -78,8 +78,8 @@ public class TreeNode{
 	
 	
 	public String toString(){
-		return this.name;
+		return Integer.toString(this.value);
 	}// end toString
-
+	
 	
 }// end TreeNode class
