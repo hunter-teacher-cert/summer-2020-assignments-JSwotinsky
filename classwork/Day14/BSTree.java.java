@@ -4,101 +4,34 @@ import java.util.*;
 /*
 
 Hunter CS Program
-LList Class
+BSTree() Class
 Jonathan Swotinsky
 
-Task: Create a class for LList
-
-When developing this class, a little planning and preparation goes a long way. 
-Try writing out an algorithm before diving into code. Diagram if that will help.
-Once you've written a method, use diagrams to follow along and "debug"
-Starting with the Node and LList classes developed in class today, augment LList class with the following methods:
-
-Default constructor 
-Initializes an empty linked list.
-
-public String toString()  
-Returns a String representation of the list.
-
-public void addFront(String value)  
-Add a new Node containing value to the front of the list.
-
-public boolean isEmpty()
-Returns true if the list is empty, false otherwise.
-
-public String get(int index)
-Returns the value (not the Node) at index.
-If index is out of bounds, return null.
-
-public void set(int index, String value)
-Set the Node at index to contain value
-If index is invalid, do nothing.
-
-public void insert(int index, String value)
-Insert a new Node containing value at index.
-If index is invalid, do nothing.
-
-public int search(String key)
-Returns the index of the first time key occurs in the list.
-Returns -1 if key is not found.
-
-public void remove(int index)
-Removes the Node at index from the list.
-If index is invalid, do nothing.
-
-If you use the provided driver file (LListDriver.java) your output should look like this:
-
-Test Empty list print & isEmpty:
-< >
-true
-
-Test addFront 3x & isEmpty():
-< everyone! news good >
-false
-
-Test get 0, 1, 5:
-everyone!
-news
-null
-
-Test set 0, 1, 5:
-< me! job good >
-
-Test insert 0, 2, 5, 10:
-< woo! me! go job good cool >
-
-Test search "woo!", "cool", "too far"
-0
-5
--1
-
-Test remove 0, 2:
-< me! go job good cool >
-< me! go good cool >
+Task: Create a class for BSTree()
 
 */
 
 
-public class LList{
+public class BSTree{
     
 	////////////////////Instance Variables////////////////////
 	
-	private Node head;
-	private int length = 0;
+	private TreeNode root;
+	private int depth = 0;
 
     
 	////////////////////Constructors////////////////////
 	
-	public LList(){
-		head = null;
+	public MyTree(){
+		root = null;
     }// end constructor
 
     
 	////////////////////Methods////////////////////
 	
-	public int getLength(){
-		return this.length;
-	}// end getLength
+	public int getDepth(){
+		return this.depth;
+	}// end getDepth
 	
 	public String toString(){
 		String s = "";
