@@ -32,16 +32,12 @@ public class TreeNode{
 	
 	
 	public TreeNode(int value){
-		this.value = value;
-		this.nextLeft = null;
-		this.nextRight = null;
+		this(value, null, null);
 	}// end constructor with data parameter only
 	
 	
 	public TreeNode(){
-		this.value = 0;
-		this.nextLeft = null;
-		this.nextRight = null;
+		this(0);
 	}// end constructor with no parameters
 	
 	
