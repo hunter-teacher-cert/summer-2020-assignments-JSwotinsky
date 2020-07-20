@@ -7,7 +7,13 @@ Hunter CS Program
 BSTree() Class
 Jonathan Swotinsky
 
-Task: Create a class for BSTree()
+Task: Create a Binary Search Tree class.
+
+Methods to Consider:
+1) Search
+2) Insert
+3) Delete
+4) Traverse/Print
 
 */
 
@@ -32,6 +38,27 @@ public class BSTree{
 	public int getDepth(){
 		return this.depth;
 	}// end getDepth
+	
+	
+	public void seed(){
+		TreeNode t;
+	
+		t = new TreeNode(10);
+		root = t;
+		t = new TreeNode(5);
+		root.setNextLeft(t);
+		t = new TreeNode(20);
+		root.setNextRight(t);
+	
+		root.getLeft().setNextRight(new TreeNode(8));
+		
+		t = new TreeNode(15);
+		root.getNextRight().setNextLeft(t);
+		
+		t = newTreeNode(22);
+		root.getNextRight().setNextRight(t);
+		
+	}// end seed
 	
 	public String toString(){
 		String s = "";
