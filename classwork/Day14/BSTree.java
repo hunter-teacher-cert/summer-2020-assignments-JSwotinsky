@@ -59,27 +59,76 @@ public class BSTree{
 		root.getNextRight().setNextRight(t);
 		
 	}// end seed
+
+	
+	/*
+	New strategy for search() method:
+	
+	(1) Create an empty junction stack.
+	
+	(2) Check the current node.  If the current node is the key, return true.  
+		Otherwise, do the following:
+	
+	(3) Check if the current node has both a left and a right node.  
+		If it does, add it to the junction stack.  
+		If it does not, do not add it to the junction stack.
+
+	(4) If the current node has a left node, proceed to the left node.  
+		If the current node has a right node only, proceed to the right node.  
+		If the current node is a dead end, proceed to the last element of the junction stack's right node and pop it off the stack.
+		
+	(5) Continue until both of the following conditions are met:
+		The current node is a dead end, and
+		The junction stack is empty
+	
+	(6) If the method has not yet returned true, return false.
+	
+	Additional Thoughts: 	Does this need recursion?
+							Does this need an overloaded method?
+	
+	*/
 	
 	
+	//Fix this method based on new strategy above:
 	public boolean search(int key){
 		TreeNode current = root;
-		while(current != null){
-			int currentValue = current.getValue();
-			if(currentValue == key){
-				return true;
-			} else if(currentValue < key){
-				current = current.getNextRight();
-				search(key);
-			} else {
-				current = current.getNextLeft();
-				search(key);
-			}// and if else
-		return false;
-		}// end while
+		// Check if the current TreeNode is equal to the key.  If it is, return "true":
+		if current.getValue() == key){
+			return true;
+		}// end if
+		// If the current TreeNode has either a left or right node, proceed:
+		while(current.getNextLeft() != null || current.getNextRight() != null){
+			// If the current TreeNode has a left node, apply search recursively to the the left node:
+			while(current.getNextLeft() != null){
+				search(key, current.getNextLeft());
+			}// end if
+			// If the current TreeNode has a right node, apply search recursively to the the right node:
+			while(current.getNextLeft() != null){
+				search(key, current.getNextRight());
+			}// end if
+	}// end search (1 parameter)
+	
+	
+	//Fix this method based on new strategy above:
+	public boolean search(int key, TreeNode current){
+		// Check if the current TreeNode is equal to the key.  If it is, return "true":
+		if (current.getValue() == key){
+			return true;
+		}// end if
 		
-		
-	}// end search
-*/
+		// If there is a left node, apply search to it.
+		// If there is no left node, but there is a right node, then apply search to the right node.
+		// If there is a dead end, apply right node checker to the previous node
+		// If the current TreeNode has a left node, apply search recursively to the the left node:
+		while(current.getNextLeft() != null){
+			search(key, current.getNextLeft());
+		}// end while	
+		// If the current TreeNode has a right node, apply search recursively to the the right node:
+		while(current.getNextLeft() != null){
+			search(key, current.getNextRight());
+		}// end if	
+	}// end search (2 parameters)
+
 
 	// Generate an array of values to fill a full binary search tree of a given depth (Values ONLY...No actual tree):
 	public int[] randomTree(int depth){
