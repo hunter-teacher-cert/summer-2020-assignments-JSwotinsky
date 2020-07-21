@@ -23,14 +23,16 @@ public class BSTree{
 	////////////////////Instance Variables////////////////////
 	
 	private TreeNode root;
-	private int depth = 0;
+	private int depth;
 	private	Stack<TreeNode> junctionStack; 
 
     
 	////////////////////Constructors////////////////////
 	
 	public BSTree(){
-		root = null;
+		this.root = null;
+		this.depth = 0;
+		this.junctionStack = new Stack<TreeNode>();
     }// end constructor
 
     
@@ -93,7 +95,7 @@ public class BSTree{
 	//Fix this method based on new strategy above:
 	public boolean search(int key){
 		TreeNode current = root;
-				
+		
 		// Check if the root is equal to the key.  If it is, return "true":
 		if(root.getValue() == key){
 			return true;
