@@ -24,6 +24,7 @@ public class BSTree{
 	
 	private TreeNode root;
 	private int depth = 0;
+	private	Stack<TreeNode> junctionStack; 
 
     
 	////////////////////Constructors////////////////////
@@ -66,12 +67,12 @@ public class BSTree{
 	
 	(1) Create an empty junction stack.
 	
-	(2) Check the current node.  If the current node is the key, return true.  
+	(2) Check the current TreeNode.  If the value of the current TreeNode is the key, return true.  
 		Otherwise, do the following:
 	
-	(3) Check if the current node has both a left and a right node.  
-		If it does, add it to the junction stack.  
-		If it does not, do not add it to the junction stack.
+	(3) Check if the current TreeNode is a junction (e.g. if it has both a left and a right TreeNode).
+		If the current TreeNode is a junction, add it to the junction stack.  
+		If the current TreeNode is not a junction, do not add it to the junction stack.
 
 	(4) If the current node has a left node, proceed to the left node.  
 		If the current node has a right node only, proceed to the right node.  
@@ -92,41 +93,65 @@ public class BSTree{
 	//Fix this method based on new strategy above:
 	public boolean search(int key){
 		TreeNode current = root;
-		// Check if the current TreeNode is equal to the key.  If it is, return "true":
-		if current.getValue() == key){
+				
+		// Check if the root is equal to the key.  If it is, return "true":
+		if(root.getValue() == key){
 			return true;
 		}// end if
-		// If the current TreeNode has either a left or right node, proceed:
-		while(current.getNextLeft() != null || current.getNextRight() != null){
-			// If the current TreeNode has a left node, apply search recursively to the the left node:
-			while(current.getNextLeft() != null){
-				search(key, current.getNextLeft());
-			}// end if
-			// If the current TreeNode has a right node, apply search recursively to the the right node:
-			while(current.getNextLeft() != null){
-				search(key, current.getNextRight());
-			}// end if
+		
+		// Check if the current TreeNode is a junction.  If it is, push it onto junctionStack:
+		if(current.getNextLeft() != null && current.getNextRight() != null){
+			junctionStack.push(current);
+		}// end if
+		
+		// If the current TreeNode has a left TreeNode, recursively invoke search on the left TreeNode:
+		if(current.getNextLeft() != null){
+			search(key, current.getNextLeft());
+		// If the current TreeNode has a right TreeNode, but no left TreeNode, recursively invoke search on the right TreeNode:
+		} else if(current.getNextLeft() == null && current.getNextRight() != null){
+			search(key, current.getNextRight());
+		// If the current TreeNode is a dead end, and junctionStack is non-empty, 
+		// pop off it's top element and recursively invoke search on it's right TreeNode:
+		} else if(current.getNextLeft() == null && current.getNextRight() == null && junctionStack.size() >= 1) {
+			TreeNode lastJunction = junctionStack.pop();
+			search(key, lastJunction.getNextRight());
+		// If the current TreeNode is a dead end, and the junction stack is empty, return false:
+		} else {
+			return false;	
+		}// end if else
+	return false;// QUESTION: Why isn't this an unreachable return statement?			
 	}// end search (1 parameter)
 	
 	
 	//Fix this method based on new strategy above:
 	public boolean search(int key, TreeNode current){
+		
 		// Check if the current TreeNode is equal to the key.  If it is, return "true":
-		if (current.getValue() == key){
+		if(current.getValue() == key){
 			return true;
 		}// end if
 		
-		// If there is a left node, apply search to it.
-		// If there is no left node, but there is a right node, then apply search to the right node.
-		// If there is a dead end, apply right node checker to the previous node
-		// If the current TreeNode has a left node, apply search recursively to the the left node:
-		while(current.getNextLeft() != null){
+		// Check if the current TreeNode is a junction.  If it is, push it onto junctionStack:
+		if(current.getNextLeft() != null && current.getNextRight() != null){
+			junctionStack.push(current);
+		}// end if
+		
+		// If the current TreeNode has a left TreeNode, recursively invoke search on the left TreeNode:
+		if(current.getNextLeft() != null){
 			search(key, current.getNextLeft());
-		}// end while	
-		// If the current TreeNode has a right node, apply search recursively to the the right node:
-		while(current.getNextLeft() != null){
+		// If the current TreeNode has a right TreeNode, but no left TreeNode, recursively invoke search on the right TreeNode:
+		} else if(current.getNextLeft() == null && current.getNextRight() != null){
 			search(key, current.getNextRight());
-		}// end if	
+		// If the current TreeNode is a dead end, and junctionStack is non-empty, 
+		// pop off it's top element and recursively invoke search on it's right TreeNode:
+		} else if(current.getNextLeft() == null && current.getNextRight() == null && junctionStack.size() >= 1) {
+			TreeNode lastJunction = junctionStack.pop();
+			search(key, lastJunction.getNextRight());
+		// If the current TreeNode is a dead end, and the junction stack is empty, return false:
+		} else {
+			return false;	
+		}// end if else
+	return false;// QUESTION: Why isn't this an unreachable return statement?		
 	}// end search (2 parameters)
 
 
