@@ -97,8 +97,61 @@ public class BSTree{
 		// Point current to the root:
 		TreeNode current = root;
 		
+		// Check if the current TreeNode is equal to the key.  If it is, return "true":
+		if(current.getValue() == key){
+			return true;
+		}// end if
+		
+		// If the key is less than the value of the current TreeNode, 
+		// and there is a nextLeft TreeNode to check, then recursively invoke
+		// search on the left TreeNode:
+		if(key <= current.getValue() && current.getNextLeft() != null){
+			return search(key, current.getNextLeft());	
+		// If the key is greater than the value of the current TreeNode, 
+		// and there is a nextRight TreeNode to check, then recursively invoke
+		// search on the right TreeNode:
+		} else if(key >= current.getValue() && current.getNextRight() != null){
+			return search(key, current.getNextRight());	
+		// If there are no appropriate TreeNodes to, return false:
+		} else {
+			return false;
+		}// end if else
+	
+	}// end search() (1 parameter)
+	
+	
+	public boolean search(int key, TreeNode current){
+		
+		// Check if the current TreeNode is equal to the key.  If it is, return "true":
+		if(current.getValue() == key){
+			return true;
+		}// end if
+		
+		// If the key is less than the value of the current TreeNode, 
+		// and there is a nextLeft TreeNode to check, then recursively invoke
+		// search on the left TreeNode:
+		if(key <= current.getValue() && current.getNextLeft() != null){
+			return search(key, current.getNextLeft());	
+		// If the key is greater than the value of the current TreeNode, 
+		// and there is a nextRight TreeNode to check, then recursively invoke
+		// search on the right TreeNode:
+		} else if(key >= current.getValue() && current.getNextRight() != null){
+			return search(key, current.getNextRight());	
+		// If there are no appropriate TreeNodes to, return false:
+		} else {
+			return false;
+		}// end if else
+	
+	}// end search() (2 parameters)
+
+
+	public boolean searchAnyTree(int key){
+		
+		// Point current to the root:
+		TreeNode current = root;
+		
 		// Check if the root is equal to the key.  If it is, return "true":
-		if(root.getValue() == key){
+		if(current.getValue() == key){
 			return true;
 		}// end if
 		
@@ -109,24 +162,24 @@ public class BSTree{
 				
 		// If the current TreeNode has a left TreeNode, recursively invoke search on the left TreeNode:
 		if(current.getNextLeft() != null){
-			return search(key, current.getNextLeft());
+			return searchAnyTree(key, current.getNextLeft());
 		// If the current TreeNode has a right TreeNode, but no left TreeNode, recursively invoke search on the right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() != null){
-			return search(key, current.getNextRight());
+			return searchAnyTree(key, current.getNextRight());
 		// If the current TreeNode is a dead-end, and junctionStack is non-empty, 
 		// pop off it's top element and recursively invoke search on it's right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() == null && junctionStack.size() >= 1) {
 			TreeNode lastJunction = junctionStack.pop();
-			return search(key, lastJunction.getNextRight());
+			return searchAnyTree(key, lastJunction.getNextRight());
 		// If the current TreeNode is a dead-end, and the junction stack is empty, return false:
 		} else {
 			return false;	
 		}// end if else	
 			
-	}// end search() (1 parameter)
+	}// end searchAnyTree() (1 parameter)
 	
 	
-	public boolean search(int key, TreeNode current){
+	public boolean searchAnyTree(int key, TreeNode current){
 		
 		// Check if the current TreeNode is equal to the key.  If it is, return "true":
 		if(current.getValue() == key){
@@ -140,21 +193,21 @@ public class BSTree{
 		
 		// If the current TreeNode has a left TreeNode, recursively invoke search on the left TreeNode:
 		if(current.getNextLeft() != null){
-			return search(key, current.getNextLeft());
+			return searchAnyTree(key, current.getNextLeft());
 		// If the current TreeNode has a right TreeNode, but no left TreeNode, recursively invoke search on the right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() != null){
-			return search(key, current.getNextRight());
+			return searchAnyTree(key, current.getNextRight());
 		// If the current TreeNode is a dead-end, and junctionStack is non-empty, 
 		// pop off it's top element and recursively invoke search on it's right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() == null && junctionStack.size() >= 1) {
 			TreeNode lastJunction = junctionStack.pop();
-			return search(key, lastJunction.getNextRight());
+			return searchAnyTree(key, lastJunction.getNextRight());
 		// If the current TreeNode is a dead-end, and the junction stack is empty, return false:
 		} else {
 			return false;	
 		}// end if else
 	
-}// end search() (2 parameters)
+}// end searchAnyTree() (2 parameters)
 
 
 	// Generate an array of values to fill a full binary search tree of a given depth (Values ONLY...No actual tree):
