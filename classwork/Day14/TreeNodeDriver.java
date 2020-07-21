@@ -4,7 +4,7 @@ import java.util.*;
 /*
 
 Hunter CS Program
-Driver to test BSTree() class
+Driver to test TreeNode() class
 Jonathan Swotinsky
 
 */

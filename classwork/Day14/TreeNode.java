@@ -4,7 +4,7 @@ import java.util.*;
 /*
 
 Hunter CS Program
-Tree Node Class
+TreeNode Class
 Jonathan Swotinsky
 
 Task: 

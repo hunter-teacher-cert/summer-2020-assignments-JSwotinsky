@@ -92,8 +92,9 @@ public class BSTree{
 	*/
 	
 	
-	//Fix this method based on new strategy above:
 	public boolean search(int key){
+		
+		// Point current to the root:
 		TreeNode current = root;
 		
 		// Check if the root is equal to the key.  If it is, return "true":
@@ -105,27 +106,26 @@ public class BSTree{
 		if(current.getNextLeft() != null && current.getNextRight() != null){
 			junctionStack.push(current);
 		}// end if
-		
+				
 		// If the current TreeNode has a left TreeNode, recursively invoke search on the left TreeNode:
 		if(current.getNextLeft() != null){
-			search(key, current.getNextLeft());
+			return search(key, current.getNextLeft());
 		// If the current TreeNode has a right TreeNode, but no left TreeNode, recursively invoke search on the right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() != null){
-			search(key, current.getNextRight());
-		// If the current TreeNode is a dead end, and junctionStack is non-empty, 
+			return search(key, current.getNextRight());
+		// If the current TreeNode is a dead-end, and junctionStack is non-empty, 
 		// pop off it's top element and recursively invoke search on it's right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() == null && junctionStack.size() >= 1) {
 			TreeNode lastJunction = junctionStack.pop();
-			search(key, lastJunction.getNextRight());
-		// If the current TreeNode is a dead end, and the junction stack is empty, return false:
+			return search(key, lastJunction.getNextRight());
+		// If the current TreeNode is a dead-end, and the junction stack is empty, return false:
 		} else {
 			return false;	
-		}// end if else
-	return false;// QUESTION: Why isn't this an unreachable return statement?			
-	}// end search (1 parameter)
+		}// end if else	
+			
+	}// end search() (1 parameter)
 	
 	
-	//Fix this method based on new strategy above:
 	public boolean search(int key, TreeNode current){
 		
 		// Check if the current TreeNode is equal to the key.  If it is, return "true":
@@ -140,21 +140,21 @@ public class BSTree{
 		
 		// If the current TreeNode has a left TreeNode, recursively invoke search on the left TreeNode:
 		if(current.getNextLeft() != null){
-			search(key, current.getNextLeft());
+			return search(key, current.getNextLeft());
 		// If the current TreeNode has a right TreeNode, but no left TreeNode, recursively invoke search on the right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() != null){
-			search(key, current.getNextRight());
-		// If the current TreeNode is a dead end, and junctionStack is non-empty, 
+			return search(key, current.getNextRight());
+		// If the current TreeNode is a dead-end, and junctionStack is non-empty, 
 		// pop off it's top element and recursively invoke search on it's right TreeNode:
 		} else if(current.getNextLeft() == null && current.getNextRight() == null && junctionStack.size() >= 1) {
 			TreeNode lastJunction = junctionStack.pop();
-			search(key, lastJunction.getNextRight());
-		// If the current TreeNode is a dead end, and the junction stack is empty, return false:
+			return search(key, lastJunction.getNextRight());
+		// If the current TreeNode is a dead-end, and the junction stack is empty, return false:
 		} else {
 			return false;	
 		}// end if else
-	return false;// QUESTION: Why isn't this an unreachable return statement?		
-	}// end search (2 parameters)
+	
+}// end search() (2 parameters)
 
 
 	// Generate an array of values to fill a full binary search tree of a given depth (Values ONLY...No actual tree):
@@ -184,7 +184,7 @@ public class BSTree{
 	public void printTree(){
 		int[] a = randomTree(3);
 		System.out.println();
-		System.out.println(Arrays.toString(a));
+		System.out.println("The values in the tree will be:\t" + Arrays.toString(a) + "\n");
 		System.out.printf("                            %02d\n",a[7]);
 		System.out.println("                     ______/  \\______"); 
 		System.out.println("              ______/                \\______"); 
