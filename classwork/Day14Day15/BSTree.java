@@ -190,9 +190,13 @@ public class BSTree{
 		TreeNode newTreeNode = new TreeNode();
 		newTreeNode.setValue(key);
 		
+		// If the tree is empty, set the root equal to newTreeNode:
+		if(root == null){
+			root = newTreeNode;
+			return;
 		// If the value of the new TreeNode is equal to the value of the current TreeNode, 
 		// print, "___ is already in this tree":	
-		if(newTreeNode.getValue() == current.getValue()){
+		} else if(newTreeNode.getValue() == current.getValue()){
 			System.out.println(key + " is already in this tree.");
 			return;
 		// If the value of the new TreeNode is less than the value of the current TreeNode, 
