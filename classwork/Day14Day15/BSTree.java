@@ -88,10 +88,12 @@ public class BSTree{
 	*/
 	
 	
-	public boolean search(int key){// The runtime of this method should be log n
-		
-		// Point current to the root:
-		TreeNode current = root;
+	public boolean search(int key){// The runtime of this method should be log n.
+		return search(key, root);
+	}// end search (public)
+	
+	
+	private boolean search(int key, TreeNode current){// The runtime of this method should be log n.
 		
 		// Check if the current TreeNode is equal to the key.  If it is, return "true":
 		if(current.getValue() == key){
@@ -113,69 +115,15 @@ public class BSTree{
 			return false;
 		}// end if else
 	
-	}// end search() (1 parameter)
-	
-	
-	public boolean search(int key, TreeNode current){// The runtime of this method should be log n.
-		
-		// Check if the current TreeNode is equal to the key.  If it is, return "true":
-		if(current.getValue() == key){
-			return true;
-		}// end if
-		
-		// If the key is less than the value of the current TreeNode, 
-		// and there is a nextLeft TreeNode to check, then recursively invoke
-		// search on the left TreeNode:
-		if(key < current.getValue() && current.getNextLeft() != null){
-			return search(key, current.getNextLeft());	
-		// If the key is greater than the value of the current TreeNode, 
-		// and there is a nextRight TreeNode to check, then recursively invoke
-		// search on the right TreeNode:
-		} else if(key > current.getValue() && current.getNextRight() != null){
-			return search(key, current.getNextRight());	
-		// If there are no appropriate TreeNodes to, return false:
-		} else {
-			return false;
-		}// end if else
-	
-	}// end search() (2 parameters)
+	}// end search (private)
 
-
-	public boolean searchAnyTree(int key){// The runtime of this method should be n.
-		
-		// Point current to the root:
-		TreeNode current = root;
-		
-		// Check if the root is equal to the key.  If it is, return "true":
-		if(current.getValue() == key){
-			return true;
-		}// end if
-		
-		// Check if the current TreeNode is a junction.  If it is, push it onto junctionStack:
-		if(current.getNextLeft() != null && current.getNextRight() != null){
-			junctionStack.push(current);
-		}// end if
-				
-		// If the current TreeNode has a left TreeNode, recursively invoke search on the left TreeNode:
-		if(current.getNextLeft() != null){
-			return searchAnyTree(key, current.getNextLeft());
-		// If the current TreeNode has a right TreeNode, but no left TreeNode, recursively invoke search on the right TreeNode:
-		} else if(current.getNextLeft() == null && current.getNextRight() != null){
-			return searchAnyTree(key, current.getNextRight());
-		// If the current TreeNode is a dead-end, and junctionStack is non-empty, 
-		// pop off it's top element and recursively invoke search on it's right TreeNode:
-		} else if(current.getNextLeft() == null && current.getNextRight() == null && junctionStack.size() >= 1) {
-			TreeNode lastJunction = junctionStack.pop();
-			return searchAnyTree(key, lastJunction.getNextRight());
-		// If the current TreeNode is a dead-end, and the junction stack is empty, return false:
-		} else {
-			return false;	
-		}// end if else	
-			
-	}// end searchAnyTree() (1 parameter)
+	
+	public boolean searchAnyTree(int key){// The runtime of this method should be log n.
+		return searchAnyTree(key, root);
+	}// end searchAnyTree (public)
 	
 	
-	public boolean searchAnyTree(int key, TreeNode current){// The runtime of this method should be n.
+	private boolean searchAnyTree(int key, TreeNode current){// The runtime of this method should be n.
 		
 		// Check if the current TreeNode is equal to the key.  If it is, return "true":
 		if(current.getValue() == key){
@@ -203,7 +151,7 @@ public class BSTree{
 			return false;	
 		}// end if else
 	
-	}// end searchAnyTree() (2 parameters)
+	}// end searchAnyTree (private)
 
 
 	/*
@@ -307,6 +255,15 @@ public class BSTree{
 		}// end if else
 	
 	}// end insert() (2 parameters)
+	
+	
+	public void traverse(){
+
+
+		
+	}// end traverse
+	
+	
 	
 	
 	// Print the path of a given element.
