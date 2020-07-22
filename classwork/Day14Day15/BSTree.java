@@ -226,23 +226,59 @@ public class BSTree{
 	}// end insert (private)
 	
 		
-	public void traverse(){
-		traverse(root);		
-	}// end traverse (public)
+	public void preOrderTraverse(){
+		preOrderTraverse(root);		
+	}// end preOrderTraverse (public)
 	
 	
-	private void traverse(TreeNode current){
+	private void preOrderTraverse(TreeNode current){
 		if(current == null){
 			return;
 		}// end if
-		//First, print the current TreeNode:
+		// First, print the current TreeNode:
 		System.out.print(current.getValue() + "\t");	
-		//Recursively invoke traverse on the left TreeNode:
-		traverse(current.getNextLeft());	
-		//Recursively invoke traverse on the right TreeNode:
-		traverse(current.getNextRight());
-	}// end traverse (private)
+		// Recursively invoke traverse on the left TreeNode:
+		preOrderTraverse(current.getNextLeft());	
+		// Recursively invoke traverse on the right TreeNode:
+		preOrderTraverse(current.getNextRight());
+	}// end preOrderTraverse (private)
 	
+	
+	public void postOrderTraverse(){
+		postOrderTraverse(root);		
+	}// end postOrderTraverse (public)
+	
+	
+	private void postOrderTraverse(TreeNode current){
+		if(current == null){
+			return;
+		}// end if	
+		// Recursively invoke traverse on the left TreeNode:
+		postOrderTraverse(current.getNextLeft());	
+		// Recursively invoke traverse on the right TreeNode:
+		postOrderTraverse(current.getNextRight());
+		// Last, print the current TreeNode:
+		System.out.print(current.getValue() + "\t");
+	}// end postOrderTraverse (private)
+	
+	
+	public void inOrderTraverse(){
+		inOrderTraverse(root);		
+	}// end inOrderTraverse (public)
+	
+	
+	private void inOrderTraverse(TreeNode current){
+		if(current == null){
+			return;
+		}// end if
+		// Recursively invoke traverse on the left TreeNode:
+		inOrderTraverse(current.getNextLeft());	
+		// Print the current TreeNode:
+		System.out.print(current.getValue() + "\t");
+		// Recursively invoke traverse on the right TreeNode:
+		inOrderTraverse(current.getNextRight());
+	}// end inOrderTraverse (private)
+
 	
 	// Print the path of a given element.
 	public void printPath(int key){

@@ -57,18 +57,30 @@ public class BSTreeDriver {
 		System.out.println();
 		
 		
-		// Test for traverse() method:
-		System.out.println("\nTest for traverse() method:\n");
-		tree3.traverse();
+		// Test for preOrderTraverse() method:
+		System.out.println("\nTest for preOrderTraverse() method:");
+		tree3.preOrderTraverse();
+		System.out.println();
+		
+		
+		// Test for postOrderTraverse() method:
+		System.out.println("\nTest for postOrderTraverse() method:");
+		tree3.postOrderTraverse();
+		System.out.println();
+		
+		
+		// Test for inOrderTraverse() method:
+		System.out.println("\nTest for inOrderTraverse() method:");
+		tree3.inOrderTraverse();
 		System.out.println("\n");
 		
-		
+		/*
 		// Test for randomTree() and printTree() methods (Visualization only, not an actual tree):
 		BSTree tree4 = new BSTree();
 		System.out.println("Test for randomTree() and printTree() methods:\n(This prints a visualization only, not an actual tree.)");
 		tree4.printTree();
 		System.out.println();
-		
+		*/
 	}// end main
 	
 }// end class MyStackDriver
