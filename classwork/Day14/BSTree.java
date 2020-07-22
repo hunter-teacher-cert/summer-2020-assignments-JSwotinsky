@@ -25,7 +25,6 @@ public class BSTree{
 	private TreeNode root;
 	private int depth;
 	private	Stack<TreeNode> junctionStack; 
-
     
 	////////////////////Constructors////////////////////
 	
@@ -227,78 +226,101 @@ public class BSTree{
 		and if the current TreeNode has a right TreeNode, proceed to the the right TreeNode.
 		
 		If the value of the new TreeNode is greater than the value of the current TreeNode, 
-		but the current TreeNode has no right TreeNode, set the current TreeNode's getNextRight to the new TreeNode.
-			
+		but the current TreeNode has no right TreeNode, set the current TreeNode's getNextRight to the new TreeNode.		
 	*/
 	
 	
 	public void insert(int key){
 		
 		// Create a new TreeNode and set it's value to the key.
-		TreeNode newTreeNode = new TreeNode(key);
+		TreeNode newTreeNode = new TreeNode();
+		newTreeNode.setValue(key);
+		
+		// Point current to the root:
+		TreeNode current = root;
 		
 		// If the value of the new TreeNode is equal to the value of the current TreeNode, 
 		// print, "___ is already in this tree":	
-		if(newTreeNode.getValue() == current.getValue(){
+		if(newTreeNode.getValue() == current.getValue()){
 			System.out.println(key + " is already in this tree.");
 			return;
 		// If the value of the new TreeNode is less than the value of the current TreeNode, 
 		// and if the current TreeNode has a left TreeNode, proceed to the the left TreeNode:
-		} else if(newTreeNode.getValue() < current.getValue && current.getNextLeft() != null) {
+		} else if(newTreeNode.getValue() < current.getValue() && current.getNextLeft() != null) {
 			insert(key, current.getNextLeft());
 			return;
 		// If the value of the new TreeNode is less than the value of the current TreeNode, 
 		// but the current TreeNode has no left TreeNode, set the current TreeNode's getNextLeft to the new TreeNode:
-		} else if(newTreeNode.getValue() < current.getValue && current.getNextLeft() == null) {
+		} else if(newTreeNode.getValue() < current.getValue() && current.getNextLeft() == null) {
 			current.setNextLeft(newTreeNode);
+			System.out.println(current.getNextLeft().getValue() + " has been inserted.");
 			return;
 		// If the value of the new TreeNode is greater than the value of the current TreeNode, 
 		// and if the current TreeNode has a right TreeNode, proceed to the the right TreeNode:
-		} else if(newTreeNode.getValue() > current.getValue && current.getNextRight() != null) {
+		} else if(newTreeNode.getValue() > current.getValue() && current.getNextRight() != null) {
 			insert(key, current.getNextRight());
 			return;
 		// If the value of the new TreeNode is greater than the value of the current TreeNode, 
 		// but the current TreeNode has no right TreeNode, set the current TreeNode's getNextRight to the new TreeNode:
 		} else {
 			current.setNextRight(newTreeNode);
+			System.out.println(current.getNextRight().getValue() + " has been inserted.");
 			return;
 		}// end if else
 	
-	}// end insert() (1 parameter)
+	}// end insert() (no parameters)
 	
 		
 	public void insert(int key, TreeNode current){
 				
+		// Create a new TreeNode and set it's value to the key.
+		TreeNode newTreeNode = new TreeNode();
+		newTreeNode.setValue(key);
+		
 		// If the value of the new TreeNode is equal to the value of the current TreeNode, 
 		// print, "___ is already in this tree":	
-		if(newTreeNode.getValue() == current.getValue(){
+		if(newTreeNode.getValue() == current.getValue()){
 			System.out.println(key + " is already in this tree.");
 			return;
 		// If the value of the new TreeNode is less than the value of the current TreeNode, 
 		// and if the current TreeNode has a left TreeNode, proceed to the the left TreeNode:
-		} else if(newTreeNode.getValue() < current.getValue && current.getNextLeft() != null) {
+		} else if(newTreeNode.getValue() < current.getValue() && current.getNextLeft() != null) {
 			insert(key, current.getNextLeft());
 			return;
 		// If the value of the new TreeNode is less than the value of the current TreeNode, 
 		// but the current TreeNode has no left TreeNode, set the current TreeNode's getNextLeft to the new TreeNode:
-		} else if(newTreeNode.getValue() < current.getValue && current.getNextLeft() == null) {
+		} else if(newTreeNode.getValue() < current.getValue() && current.getNextLeft() == null) {
 			current.setNextLeft(newTreeNode);
+			System.out.println(current.getNextLeft().getValue() + " has been inserted.");
 			return;
 		// If the value of the new TreeNode is greater than the value of the current TreeNode, 
 		// and if the current TreeNode has a right TreeNode, proceed to the the right TreeNode:
-		} else if(newTreeNode.getValue() > current.getValue && current.getNextRight() != null) {
+		} else if(newTreeNode.getValue() > current.getValue() && current.getNextRight() != null) {
 			insert(key, current.getNextRight());
 			return;
 		// If the value of the new TreeNode is greater than the value of the current TreeNode, 
 		// but the current TreeNode has no right TreeNode, set the current TreeNode's getNextRight to the new TreeNode:
 		} else {
 			current.setNextRight(newTreeNode);
+			System.out.println(current.getNextRight().getValue() + " has been inserted.");
 			return;
 		}// end if else
 	
 	}// end insert() (2 parameters)
 	
 	
+	// Print the path of a given element.
+	public void printPath(int key){
+		
+	}// end printPath
+	
+	
+	// Print the paths of all "dead-end" elements on seperate lines from left-most path to right-most path.
+	public void printAllPaths(){
+		
+	}// end printAllPaths
+
+		
 	// Generate an array of values to fill a full binary search tree of a given depth (Values ONLY...No actual tree):
 	public int[] randomTree(int depth){
 		// Create a Random object:

@@ -21,7 +21,7 @@ public class BSTreeDriver {
 		System.out.println("\nTest for search() method:\n");
 		System.out.println("10 is an element (This should be true):  " + tree1.searchAnyTree(10));
 		System.out.println("5 is an element (This should be true):  " + tree1.searchAnyTree(5));
-		System.out.println("99 is an element (This should be false):  " + tree1.searchAnyTree(99));
+		System.out.println("99 is an element (This should be false):  " + tree1.searchAnyTree(17));
 		System.out.println("8 is an element (This should be true):  " + tree1.searchAnyTree(8));
 		System.out.println("15 is an element (This should be true):  " + tree1.searchAnyTree(15));
 		System.out.println("22 is an element (This should be true):  " + tree1.searchAnyTree(22));
@@ -39,7 +39,16 @@ public class BSTreeDriver {
 		System.out.println("8 is an element (This should be true):  " + tree2.searchAnyTree(8));
 		System.out.println("15 is an element (This should be true):  " + tree2.searchAnyTree(15));
 		System.out.println("22 is an element (This should be true):  " + tree2.searchAnyTree(22));
-		System.out.println("99 is an element (This should be false):  " + tree2.searchAnyTree(99));
+		System.out.println("99 is an element (This should be false):  " + tree2.searchAnyTree(17));
+		System.out.println();
+		
+		
+		// Test for insert() method:
+		System.out.println("\nTest for insert() method:\n");
+		tree2.insert(10);
+		tree2.insert(17);
+		tree2.insert(17);
+		tree2.insert(99);
 		System.out.println();
 		
 		

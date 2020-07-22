@@ -20,7 +20,7 @@ public class TreeNode{
 	private int value;
 	private TreeNode nextLeft;
 	private TreeNode nextRight;
-	
+	private TreeNode parent;
 	
 	////////////////////Constructors////////////////////
 	
@@ -48,13 +48,20 @@ public class TreeNode{
 	}// end setValue
 	
 	
+	private void setParent(TreeNode parent){
+		this.parent = parent;
+	}// end setParent
+
+	
 	public void setNextLeft(TreeNode nextLeft){
 		this.nextLeft = nextLeft;
+		this.nextLeft.setParent(this);
 	}// end setNextLeft
 	
 	
 	public void setNextRight(TreeNode nextRight){
 		this.nextRight = nextRight;
+		this.nextRight.setParent(this);
 	}// end setNextRight
 	
 	
@@ -70,6 +77,11 @@ public class TreeNode{
 	
 	public TreeNode getNextRight(){
 		return nextRight;
+	}// end getNextRight
+	
+	
+	public TreeNode getParent(){
+		return parent;
 	}// end getNextRight
 	
 	
