@@ -57,6 +57,12 @@ public class BSTreeDriver {
 		System.out.println();
 		
 		
+		// Test for traverse() method:
+		System.out.println("\nTest for traverse() method:\n");
+		tree3.traverse();
+		System.out.println("\n");
+		
+		
 		// Test for randomTree() and printTree() methods (Visualization only, not an actual tree):
 		BSTree tree4 = new BSTree();
 		System.out.println("Test for randomTree() and printTree() methods:\n(This prints a visualization only, not an actual tree.)");

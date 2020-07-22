@@ -225,15 +225,23 @@ public class BSTree{
 	
 	}// end insert (private)
 	
-	
-	
-	public void traverse(){
-
-
 		
-	}// end traverse
+	public void traverse(){
+		traverse(root);		
+	}// end traverse (public)
 	
 	
+	private void traverse(TreeNode current){
+		if(current == null){
+			return;
+		}// end if
+		//First, print the current TreeNode:
+		System.out.print(current.getValue() + "\t");	
+		//Recursively invoke traverse on the left TreeNode:
+		traverse(current.getNextLeft());	
+		//Recursively invoke traverse on the right TreeNode:
+		traverse(current.getNextRight());
+	}// end traverse (private)
 	
 	
 	// Print the path of a given element.
