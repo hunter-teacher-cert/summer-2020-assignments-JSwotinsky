@@ -26,6 +26,7 @@ public class BSTree{
 	private int depth;
 	private	Stack<TreeNode> junctionStack; 
     
+	
 	////////////////////Constructors////////////////////
 	
 	public BSTree(){
@@ -63,31 +64,6 @@ public class BSTree{
 	}// end seed
 
 	
-	/*
-	New strategy for searchAnyTree() method:
-	
-	(1) Create an empty junction stack.
-	
-	(2) Check the current TreeNode.  If the value of the current TreeNode is the key, return true.  
-		Otherwise, do the following:
-	
-	(3) Check if the current TreeNode is a junction (e.g. if it has both a left and a right TreeNode).
-		If the current TreeNode is a junction, add it to the junction stack.  
-		If the current TreeNode is not a junction, do not add it to the junction stack.
-
-	(4) If the current TreeNode has a left TreeNode, proceed to the left TreeNode.  
-		If the current TreeNode has a right TreeNode only, proceed to the right TreeNode.  
-		If the current TreeNode is a dead end, proceed to the last element of the junction stack's right node and pop it off the stack.
-		
-	(5) Continue until both of the following conditions are met:
-		The current TreeNode is a dead end, and
-		The junction stack is empty
-	
-	(6) If the method has not yet returned true, return false.
-	
-	*/
-	
-	
 	public boolean search(int key){// The runtime of this method should be log n.
 		return search(key, root);
 	}// end search (public)
@@ -117,6 +93,31 @@ public class BSTree{
 	
 	}// end search (private)
 
+	
+	/*
+	Strategy for searchAnyTree() method:
+	
+	(1) Create an empty junction stack.
+	
+	(2) Check the current TreeNode.  If the value of the current TreeNode is the key, return true.  
+		Otherwise, do the following:
+	
+	(3) Check if the current TreeNode is a junction (e.g. if it has both a left and a right TreeNode).
+		If the current TreeNode is a junction, add it to the junction stack.  
+		If the current TreeNode is not a junction, do not add it to the junction stack.
+
+	(4) If the current TreeNode has a left TreeNode, proceed to the left TreeNode.  
+		If the current TreeNode has a right TreeNode only, proceed to the right TreeNode.  
+		If the current TreeNode is a dead end, proceed to the last element of the junction stack's right node and pop it off the stack.
+		
+	(5) Continue until both of the following conditions are met:
+		The current TreeNode is a dead end, and
+		The junction stack is empty
+	
+	(6) If the method has not yet returned true, return false.
+	
+	*/
+	
 	
 	public boolean searchAnyTree(int key){// The runtime of this method should be log n.
 		return searchAnyTree(key, root);
@@ -155,7 +156,7 @@ public class BSTree{
 
 
 	/*
-	New strategy for insert() method:
+	Strategy for insert() method:
 		
 	(1) Create a new TreeNode and set it's value to the key.
 	
@@ -179,47 +180,11 @@ public class BSTree{
 	
 	
 	public void insert(int key){
-		
-		// Create a new TreeNode and set it's value to the key.
-		TreeNode newTreeNode = new TreeNode();
-		newTreeNode.setValue(key);
-		
-		// Point current to the root:
-		TreeNode current = root;
-		
-		// If the value of the new TreeNode is equal to the value of the current TreeNode, 
-		// print, "___ is already in this tree":	
-		if(newTreeNode.getValue() == current.getValue()){
-			System.out.println(key + " is already in this tree.");
-			return;
-		// If the value of the new TreeNode is less than the value of the current TreeNode, 
-		// and if the current TreeNode has a left TreeNode, proceed to the the left TreeNode:
-		} else if(newTreeNode.getValue() < current.getValue() && current.getNextLeft() != null) {
-			insert(key, current.getNextLeft());
-			return;
-		// If the value of the new TreeNode is less than the value of the current TreeNode, 
-		// but the current TreeNode has no left TreeNode, set the current TreeNode's getNextLeft to the new TreeNode:
-		} else if(newTreeNode.getValue() < current.getValue() && current.getNextLeft() == null) {
-			current.setNextLeft(newTreeNode);
-			System.out.println(current.getNextLeft().getValue() + " has been inserted.");
-			return;
-		// If the value of the new TreeNode is greater than the value of the current TreeNode, 
-		// and if the current TreeNode has a right TreeNode, proceed to the the right TreeNode:
-		} else if(newTreeNode.getValue() > current.getValue() && current.getNextRight() != null) {
-			insert(key, current.getNextRight());
-			return;
-		// If the value of the new TreeNode is greater than the value of the current TreeNode, 
-		// but the current TreeNode has no right TreeNode, set the current TreeNode's getNextRight to the new TreeNode:
-		} else {
-			current.setNextRight(newTreeNode);
-			System.out.println(current.getNextRight().getValue() + " has been inserted.");
-			return;
-		}// end if else
-	
-	}// end insert() (no parameters)
+		insert(key, root); 
+	}// end insert (public)
 	
 		
-	public void insert(int key, TreeNode current){
+	private void insert(int key, TreeNode current){
 				
 		// Create a new TreeNode and set it's value to the key.
 		TreeNode newTreeNode = new TreeNode();
@@ -254,7 +219,8 @@ public class BSTree{
 			return;
 		}// end if else
 	
-	}// end insert() (2 parameters)
+	}// end insert (private)
+	
 	
 	
 	public void traverse(){
@@ -299,8 +265,7 @@ public class BSTree{
 		return treeValues;		
 	}// end randomTree	
 	
-	
-	
+		
 	// Print a full binary search tree with random values up to a depth of 3 (Image ONLY...No actual tree):
 	public void printTree(){
 		int[] a = randomTree(3);
