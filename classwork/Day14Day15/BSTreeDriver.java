@@ -45,17 +45,22 @@ public class BSTreeDriver {
 		
 		// Test for insert() method:
 		System.out.println("\nTest for insert() method:\n");
-		tree2.insert(10);
-		tree2.insert(17);
-		tree2.insert(17);
-		tree2.insert(99);
+		BSTree tree3 = new BSTree();
+		tree3.insert(10);
+		tree3.insert(20);
+		tree3.insert(5);
+		tree3.insert(7);
+		tree3.insert(8);
+		tree3.insert(3);
+		tree3.insert(25);
+		tree3.insert(25);
 		System.out.println();
 		
 		
 		// Test for randomTree() and printTree() methods (Visualization only, not an actual tree):
-		BSTree tree3 = new BSTree();
+		BSTree tree4 = new BSTree();
 		System.out.println("Test for randomTree() and printTree() methods:\n(This prints a visualization only, not an actual tree.)");
-		tree3.printTree();
+		tree4.printTree();
 		System.out.println();
 		
 	}// end main
