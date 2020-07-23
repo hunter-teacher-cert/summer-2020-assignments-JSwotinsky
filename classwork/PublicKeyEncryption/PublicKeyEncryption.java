@@ -13,8 +13,8 @@ public class PublicKeyEncryption{
     
 	////////////////////Instance Variables////////////////////
 	
-	private static long p = 3;
-	private static long q = 7;
+	private static long p = 19;
+	private static long q = 31;
     
 	
 	////////////////////Constructors////////////////////
@@ -125,7 +125,23 @@ public class PublicKeyEncryption{
 		return euclid[1][1];		
 	}// end getD()
 	
-		
+	
+	/**
+	* Encrypt a numeric message. 
+	*/
+	private static long encryptNumeric(long number, long publicKeyE, long publicKeyN){
+		return (long)Math.pow(number, publicKeyE)%publicKeyN;
+	}// encryptNumeric()
+	
+	
+	/**
+	* Decrypt a numeric message. 
+	*/
+	private static long decryptNumeric(long number, long privateKeyD, long publicKeyN){
+		return (long)Math.pow(number, privateKeyD)%publicKeyN;
+	}// decryptNumeric()
+
+	
 	/**
 	* main
 	*/
@@ -181,6 +197,27 @@ public class PublicKeyEncryption{
 		System.out.printf("Phi = %d\n",Phi);
 		System.out.printf("%d * %d mod %d = %d\n",e,d,Phi,(e*d)%Phi);
 		System.out.println();
+		
+		
+		// Test for encryptNumeric() and decryptNumeric() methods.
+		p = 19;
+		q = 31;
+		long publicKeyN = getN(p,q);
+		long publicKeyE = getE(p,q);
+		long messageToEncrypt = 19;
+		System.out.printf("Test for encryptNumeric (assume p = %d and q = %d):\n",p,q);
+		System.out.printf("Public key: n = %d, e= %d\n",publicKeyN, publicKeyE);
+		System.out.printf("Message to encrypt: %d\n",messageToEncrypt);
+		System.out.printf("Encrypted message: %d\n\n",encryptNumeric(messageToEncrypt, publicKeyE, publicKeyN));
+		
+		long privateKeyD = getD(p,q);
+		long messageToDecrypt = 38;
+		System.out.printf("Test for encryptNumeric (assume p = %d and q = %d):\n",p,q);
+		System.out.printf("Private key: n = %d, d= %d\n",publicKeyN, privateKeyD);
+		System.out.printf("Message to decrypt: %d\n",messageToDecrypt);
+		System.out.printf("Decrypted message: %d\n\n",decryptNumeric(messageToDecrypt, privateKeyD, publicKeyN));
+		
+	
 			
 	}// end main()
 	
