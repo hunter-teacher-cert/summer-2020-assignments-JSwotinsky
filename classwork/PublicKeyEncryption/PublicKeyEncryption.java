@@ -72,7 +72,7 @@ public class PublicKeyEncryption{
 	* e is prime.
 	* e is not a factor of Phi.
 	*/
-	private static long getE(){
+	private static long getE(long p, long q){
 		boolean foundE = false;
 		long e = 2;
 		while(foundE = false){
@@ -112,6 +112,21 @@ public class PublicKeyEncryption{
 		System.out.printf("p = %d\n", p);
 		System.out.printf("q = %d\n", q);
 		System.out.printf("n = %d\n", getN(p,q));	
+		System.out.println();
+		
+		
+		// Test for getPhi() method:
+		System.out.println("Test for getPhi() method:");
+		System.out.printf("p - 1 = %d\n", p - 1);
+		System.out.printf("q - 1 = %d\n", q - 1);
+		System.out.printf("Phi = %d\n", getPhi(p,q));	
+		System.out.println();
+		
+		
+		// Test for getE() method:
+		System.out.println("Test for getE() method:");
+		System.out.printf("Phi = %d\n", getPhi(p,q));
+		System.out.printf("e = %d\n", getE(p,q));	
 		System.out.println();
 			
 	}// end main()
