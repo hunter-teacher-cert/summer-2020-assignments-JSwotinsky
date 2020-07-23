@@ -100,12 +100,19 @@ public class PublicKeyEncryption{
 		
 		
 		// Test for isPrime() method:
-		System.out.println("\nTest for isFactorOf() method:");
+		System.out.println("Test for isFactorOf() method:");
 		for(int i = 2; i <= 20; i++){
 			System.out.printf("%d is prime: %B\n", i, isPrime(i));
 		}// end for i
 		System.out.println();
-			
+		
+		
+		// Test for getN() method:
+		System.out.println("Test for getN() method:");
+		System.out.printf("p = %d\n", p);
+		System.out.printf("q = %d\n", q);
+		System.out.printf("n = %d\n", getN(p,q));	
+		System.out.println();
 			
 	}// end main()
 	
