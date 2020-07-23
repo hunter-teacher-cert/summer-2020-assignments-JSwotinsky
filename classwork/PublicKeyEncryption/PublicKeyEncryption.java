@@ -13,8 +13,8 @@ public class PublicKeyEncryption{
     
 	////////////////////Instance Variables////////////////////
 	
-	private static long p = 7;
-	private static long q = 11;
+	private static long p = 3;
+	private static long q = 7;
     
 	
 	////////////////////Constructors////////////////////
@@ -67,7 +67,7 @@ public class PublicKeyEncryption{
 	
 	
 	/**
-	* Return the least positive long, e, that meets both of the following requirements:
+	* Return the public key, e, the least positive long that meets both of the following requirements:
 	* e is greater than or equal to 3. 
 	* e is prime.
 	* e is not a factor of Phi.
@@ -85,6 +85,43 @@ public class PublicKeyEncryption{
 	}// end getE()
 	
 	
+	/**
+	* Return a private key, d, such that (e * d) mod phi = 1.
+	* (This method uses the Extended Euclidean Algorithm (EAE).)
+	*/
+	private static long getD(long p, long q){
+		// Establish variables:
+		long phi = getPhi(p,q);
+		long e = getE(p,q);		
+		// Construct a 2D Array to walk through the steps of the EAE: 
+		long[][] euclid = new long[2][2];
+		// Set the values of the first row in the array to phi:
+		euclid[0][0] = phi;
+		euclid[0][1] = phi;
+		// Set the values of the second row in the array to e and 1 respectively:
+		euclid[1][0] = e;
+		euclid[1][1] = 1;
+		//Repeat the following process until euclid row 2 column 1 is equal to 1:
+		while(euclid[1][0] != 1){
+			// Find the quotient of euclid[0][0] and [1][0]
+			long quotient = (euclid[1][0] - euclid[1][0]%euclid[1][1])/euclid[1][1];
+			// Create an array to hold the products of quotient and each of the values in euclid row 2 respectively:
+			long[] products = {euclid[1][0]*quotient,euclid[1][1]*quotient};
+			// Create an array to hold the differences of the values in euclid row 1 and the values in product[] respectively.
+			// (mod the values in euclid row 1 to account for negative numbers):
+			long[] differences = {euclid[0][0] - products[0], euclid[0][1] - products[1]};
+			differences[0] = differences[0]%euclid[0][0];
+			differences[1] = differences[1]%euclid[0][1];
+			// Assign the values in euclid row 2 to euclid row 1, and assign the values in differences to euclid row 2:
+			euclid[0][0] = euclid[1][0];
+			euclid[0][1] = euclid[1][1];
+			euclid[0][1] = differences[0];
+			euclid[1][1] = differences[1];
+		}// end while
+		return euclid[1][1];		
+	}// end getD()
+	
+		
 	/**
 	* main
 	*/
@@ -127,6 +164,18 @@ public class PublicKeyEncryption{
 		System.out.println("Test for getE() method:");
 		System.out.printf("Phi = %d\n", getPhi(p,q));
 		System.out.printf("e = %d\n", getE(p,q));	
+		System.out.println();
+		
+		
+		// Test for getD() method:
+		System.out.println("Test for getD() method:");
+		long e = getE(p,q);
+		long d = getD(p,q);
+		long Phi = getPhi(p,q);
+		System.out.printf("e = %d\n", e);
+		System.out.printf("d = %d\n", d);
+		System.out.printf("Phi = %d\n",Phi);
+		System.out.printf("%d * %d mod %d = %d\n",(e*d)%Phi);
 		System.out.println();
 			
 	}// end main()
