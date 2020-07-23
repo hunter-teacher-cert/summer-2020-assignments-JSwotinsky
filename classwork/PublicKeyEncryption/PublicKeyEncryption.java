@@ -13,8 +13,8 @@ public class PublicKeyEncryption{
     
 	////////////////////Instance Variables////////////////////
 	
-	private static long p = 3;
-	private static long q = 7;
+	private static long p = 7;
+	private static long q = 11;
     
 	
 	////////////////////Constructors////////////////////
@@ -75,7 +75,7 @@ public class PublicKeyEncryption{
 	private static long getE(long p, long q){
 		boolean foundE = false;
 		long e = 2;
-		while(foundE = false){
+		while(foundE == false){
 			e++;
 			if(isPrime(e) && isFactorOf(e,getPhi(p,q)) != true){
 				foundE = true;
@@ -100,7 +100,7 @@ public class PublicKeyEncryption{
 		
 		
 		// Test for isPrime() method:
-		System.out.println("Test for isFactorOf() method:");
+		System.out.println("Test for isPrime() method:");
 		for(int i = 2; i <= 20; i++){
 			System.out.printf("%d is prime: %B\n", i, isPrime(i));
 		}// end for i
