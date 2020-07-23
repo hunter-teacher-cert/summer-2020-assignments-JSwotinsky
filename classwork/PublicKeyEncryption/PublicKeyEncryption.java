@@ -13,36 +13,36 @@ public class PublicKeyEncryption{
     
 	////////////////////Instance Variables////////////////////
 	
-	
+	private static long p = 3;
+	private static long q = 7;
     
 	
 	////////////////////Constructors////////////////////
 	
-	
-
     
+	
+	
 	////////////////////Methods////////////////////
 	
 	/**
 	* Take two longs, m and n, and return true if m is a factor of n or false if m is not a factor of n.
 	*/
-	private boolean isFactorOf(long m, long n){
-		for(i == 2; i <= Math.sqrt(n); i++){
+	private static boolean isFactorOf(long m, long n){
+		for(int i = 2; i <= Math.sqrt(n); i++){
 			if(n % m == 0){
 				return true;
-			} else {
-				return false;
 			}// end if else
 		}// end for i
+		return false;
 	}// end isFactorOf()
 	
 	
 	/**
 	* Take a long, n, and return true if n is prime or false if n is not prime.
 	*/
-	private boolean isPrime(long n){
-		for(i == 2; i <= n/2; i++){
-			if(isFactorOf(i, n){
+	private static boolean isPrime(long n){
+		for(int i = 2; i <= n/2; i++){
+			if(isFactorOf(i, n)){
 				return false;
 			}// end if	
 		}// end for i
@@ -53,7 +53,7 @@ public class PublicKeyEncryption{
 	/**
 	* Take two "large" primes, p and q, and return the product of p and q. 
 	*/
-	private long getN(long p, long q){
+	private static long getN(long p, long q){
 		return p*q;
 	}// end getN()
 	
@@ -61,33 +61,52 @@ public class PublicKeyEncryption{
 	/**
 	* Take two "large" primes, p and q, and return the product of (p-1) and (q-1). 
 	*/
-	private long getPhi(long p, long q){
+	private static long getPhi(long p, long q){
 		return (p-1)*(q-1);
-	}// end getPhi
+	}// end getPhi()
 	
 	
 	/**
-	* Return the least prime number that is not a factor of Phi. 
+	* Return the least positive long, e, that meets both of the following requirements:
+	* e is greater than or equal to 3. 
+	* e is prime.
+	* e is not a factor of Phi.
 	*/
-	private long getE(){
-		// Beginning with n = 3, check to see if n meets the following conditions:
-		// (1) n is prime.
-		isPrime(argument)
-		// (2) n is not a factor of Phi.
-		
-		
-		
-		isPrime(35) --> false
-		isPrime(7) --> true
-		
-	}
+	private static long getE(){
+		boolean foundE = false;
+		long e = 2;
+		while(foundE = false){
+			e++;
+			if(isPrime(e) && isFactorOf(e,getPhi(p,q)) != true){
+				foundE = true;
+			}// end if
+		}// end while
+		return e;		
+	}// end getE()
 	
 	
-	
+	/**
+	* main
+	*/
 	public static void main(String[] args){
+		
+		// Test for isFactorOf() method:
+		System.out.println("\nTest for isFactorOf() method:");
+		System.out.printf("%d is a factor of %d: %B\n",2,10,isFactorOf(2,10));
+		System.out.printf("%d is a factor of %d: %B\n",2,6,isFactorOf(2,6));
+		System.out.printf("%d is a factor of %d: %B\n",6,2,isFactorOf(6,2));
+		System.out.printf("%d is a factor of %d: %B\n",3,10,isFactorOf(3,10));			
+		System.out.println();
+		
+		
+		// Test for isPrime() method:
+		System.out.println("\nTest for isFactorOf() method:");
+		for(int i = 2; i <= 20; i++){
+			System.out.printf("%d is prime: %B\n", i, isPrime(i));
+		}// end for i
+		System.out.println();
 			
 			
-			
-	}// end main
+	}// end main()
 	
 }// end LList class
