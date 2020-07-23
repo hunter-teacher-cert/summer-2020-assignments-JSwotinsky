@@ -104,18 +104,22 @@ public class PublicKeyEncryption{
 		//Repeat the following process until euclid row 2 column 1 is equal to 1:
 		while(euclid[1][0] != 1){
 			// Find the quotient of euclid[0][0] and [1][0]
-			long quotient = (euclid[1][0] - euclid[1][0]%euclid[1][1])/euclid[1][1];
+			long quotient = (euclid[0][0] - euclid[0][0]%euclid[0][1])/euclid[1][0];
 			// Create an array to hold the products of quotient and each of the values in euclid row 2 respectively:
 			long[] products = {euclid[1][0]*quotient,euclid[1][1]*quotient};
 			// Create an array to hold the differences of the values in euclid row 1 and the values in product[] respectively.
-			// (mod the values in euclid row 1 to account for negative numbers):
 			long[] differences = {euclid[0][0] - products[0], euclid[0][1] - products[1]};
-			differences[0] = differences[0]%euclid[0][0];
-			differences[1] = differences[1]%euclid[0][1];
+			// While any of the values in differences are negative add Phi until they become positive:
+			while(differences[0] < 0){
+				differences[0] = differences[0] + phi;
+			}// end while
+			while(differences[1] < 0){
+				differences[1] = differences[1] + phi;
+			}// end while		
 			// Assign the values in euclid row 2 to euclid row 1, and assign the values in differences to euclid row 2:
 			euclid[0][0] = euclid[1][0];
 			euclid[0][1] = euclid[1][1];
-			euclid[0][1] = differences[0];
+			euclid[1][0] = differences[0];
 			euclid[1][1] = differences[1];
 		}// end while
 		return euclid[1][1];		
@@ -175,7 +179,7 @@ public class PublicKeyEncryption{
 		System.out.printf("e = %d\n", e);
 		System.out.printf("d = %d\n", d);
 		System.out.printf("Phi = %d\n",Phi);
-		System.out.printf("%d * %d mod %d = %d\n",(e*d)%Phi);
+		System.out.printf("%d * %d mod %d = %d\n",e,d,Phi,(e*d)%Phi);
 		System.out.println();
 			
 	}// end main()
