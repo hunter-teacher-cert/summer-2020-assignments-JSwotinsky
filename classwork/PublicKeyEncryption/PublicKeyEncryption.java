@@ -258,14 +258,14 @@ public class PublicKeyEncryption{
 		q = 523;
 		long publicKeyN = getN(p,q);
 		long publicKeyE = getE(p,q);
-		long messageToEncrypt = 200;
+		long messageToEncrypt = 150;
 		System.out.printf("Test for encryptNumeric (assume p = %d and q = %d):\n",p,q);
 		System.out.printf("Public key: n = %d, e= %d\n",publicKeyN, publicKeyE);
 		System.out.printf("Message to encrypt: %d\n",messageToEncrypt);
 		System.out.printf("Encrypted message: %d\n\n",encryptNumeric(messageToEncrypt, publicKeyE, publicKeyN));
 		
 		long privateKeyD = getD(p,q);
-		long messageToDecrypt = 61982;
+		long messageToDecrypt = 72019;
 		System.out.printf("Test for decryptNumeric (assume p = %d and q = %d):\n",p,q);
 		System.out.printf("Private key: n = %d, d= %d\n",publicKeyN, privateKeyD);
 		System.out.printf("Message to decrypt: %d\n",messageToDecrypt);
