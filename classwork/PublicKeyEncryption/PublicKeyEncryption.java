@@ -13,8 +13,8 @@ public class PublicKeyEncryption{
     
 	////////////////////Instance Variables////////////////////
 	
-	private static long p = 19;
-	private static long q = 31;
+	private static long p = 229; //50th prime number
+	private static long q = 523; //99th prime number
     
 	
 	////////////////////Constructors////////////////////
@@ -48,6 +48,18 @@ public class PublicKeyEncryption{
 		}// end for i
 		return true;	
 	}// end isPrime()
+	
+	
+	/**
+	* For large integers, take a base, b, and exponent, n, and a modulus, m and return b^n mod m.
+	*/
+	private static long largePowerMod(long b, long n, long m){
+		long result = 1;
+		for(int i = 1; i <= n; i++){
+			result = (result*b)%m;
+		}// end for i
+		return result;
+	}// end largePowerMod()
 	
 	
 	/**
@@ -130,17 +142,51 @@ public class PublicKeyEncryption{
 	* Encrypt a numeric message. 
 	*/
 	private static long encryptNumeric(long number, long publicKeyE, long publicKeyN){
-		return (long)Math.pow(number, publicKeyE)%publicKeyN;
-	}// encryptNumeric()
+		return largePowerMod(number, publicKeyE, publicKeyN);
+	}// end encryptNumeric()
 	
 	
 	/**
 	* Decrypt a numeric message. 
 	*/
 	private static long decryptNumeric(long number, long privateKeyD, long publicKeyN){
-		return (long)Math.pow(number, privateKeyD)%publicKeyN;
-	}// decryptNumeric()
+		return largePowerMod(number, privateKeyD, publicKeyN);
+	}// end decryptNumeric()
 
+		
+	/**
+	* Take a character, and return its ASCII number as a 3-digit string. 
+	*/
+	private static String toAscii(char ch){
+		// Convert char to it's ASCII equivalent:
+		int asciiInt = (int) ch;
+		String asciiString = Integer.toString(asciiInt);
+		// If the ASCII equivalent of ch contains only one digit, place two leading zero's at the front.
+		if(asciiInt <= 9){
+			asciiString = "00" + asciiString;
+			return asciiString;
+		} else if(asciiInt >= 10 && asciiInt <= 99){
+			asciiString = "0" + asciiString;
+			return asciiString;
+		} else {
+			return asciiString;
+		}// end if else
+	}// end toAscii()
+	
+	
+	/**
+	* Take a String, and transform it to a long. 
+	*/
+	private static String stringToLong(String s){
+		// Create an empty String, numberString:
+		String numberString = "";
+		// For each character in s, append it's ASCII representation to the end of numberString:
+		for(int i = 0; i <= s.length() - 1; i++){
+			numberString = numberString + toAscii(s.charAt(i));
+		}// end for i	
+		return numberString;
+	}// end stringToLong()
+	
 	
 	/**
 	* main
@@ -161,6 +207,14 @@ public class PublicKeyEncryption{
 		for(int i = 2; i <= 20; i++){
 			System.out.printf("%d is prime: %B\n", i, isPrime(i));
 		}// end for i
+		System.out.println();
+			
+		
+		// Test for largePowerMod() method:
+		System.out.println("Test for largePowerMod() method:");
+		System.out.printf("%d^%d mod %d = %d\n", 2, 3, 5, largePowerMod(2, 3, 5));
+		System.out.printf("%d^%d mod %d = %d\n", 5, 8, 1000, largePowerMod(5, 8, 1000));
+		System.out.printf("%d^%d mod %d = %d\n", 123, 456, 7890, largePowerMod(123, 456, 7890));
 		System.out.println();
 		
 		
@@ -197,28 +251,43 @@ public class PublicKeyEncryption{
 		System.out.printf("Phi = %d\n",Phi);
 		System.out.printf("%d * %d mod %d = %d\n",e,d,Phi,(e*d)%Phi);
 		System.out.println();
-		
+			
 		
 		// Test for encryptNumeric() and decryptNumeric() methods.
-		p = 19;
-		q = 31;
+		p = 229;
+		q = 523;
 		long publicKeyN = getN(p,q);
 		long publicKeyE = getE(p,q);
-		long messageToEncrypt = 19;
+		long messageToEncrypt = 200;
 		System.out.printf("Test for encryptNumeric (assume p = %d and q = %d):\n",p,q);
 		System.out.printf("Public key: n = %d, e= %d\n",publicKeyN, publicKeyE);
 		System.out.printf("Message to encrypt: %d\n",messageToEncrypt);
 		System.out.printf("Encrypted message: %d\n\n",encryptNumeric(messageToEncrypt, publicKeyE, publicKeyN));
 		
 		long privateKeyD = getD(p,q);
-		long messageToDecrypt = 38;
-		System.out.printf("Test for encryptNumeric (assume p = %d and q = %d):\n",p,q);
+		long messageToDecrypt = 61982;
+		System.out.printf("Test for decryptNumeric (assume p = %d and q = %d):\n",p,q);
 		System.out.printf("Private key: n = %d, d= %d\n",publicKeyN, privateKeyD);
 		System.out.printf("Message to decrypt: %d\n",messageToDecrypt);
 		System.out.printf("Decrypted message: %d\n\n",decryptNumeric(messageToDecrypt, privateKeyD, publicKeyN));
 		
-	
-			
+		
+		// Test for toAscii() method:
+		System.out.println("Test for toAscii() method:");
+		System.out.printf("tab:\t %S\n", toAscii('\t'));
+		System.out.printf("!:\t %S\n", toAscii('!'));
+		System.out.printf("1:\t %S\n", toAscii('1'));
+		System.out.printf("A:\t %S\n", toAscii('A'));
+		System.out.printf("a:\t %S\n", toAscii('a'));
+		System.out.println();
+		
+		
+		// Test for stringToLong() method:
+		System.out.println("Test for stringToLong() method:");
+		String s = "Hello, World";
+		System.out.printf("%s: %s\n", s, stringToLong(s));
+		System.out.println();
+		
 	}// end main()
 	
 }// end LList class
