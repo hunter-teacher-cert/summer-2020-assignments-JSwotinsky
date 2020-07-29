@@ -15,6 +15,8 @@ public class PublicKeyEncryption{
 	
 	private static long p = 229; //50th prime number
 	private static long q = 523; //99th prime number
+	private static long n = p * q;
+	private static long e = null;
     
 	
 	////////////////////Constructors////////////////////
@@ -28,12 +30,7 @@ public class PublicKeyEncryption{
 	* Take two longs, m and n, and return true if m is a factor of n or false if m is not a factor of n.
 	*/
 	private static boolean isFactorOf(long m, long n){
-		for(int i = 2; i <= Math.sqrt(n); i++){
-			if(n % m == 0){
-				return true;
-			}// end if else
-		}// end for i
-		return false;
+		return n % m == 0;
 	}// end isFactorOf()
 	
 	
@@ -41,7 +38,7 @@ public class PublicKeyEncryption{
 	* Take a long, n, and return true if n is prime or false if n is not prime.
 	*/
 	private static boolean isPrime(long n){
-		for(int i = 2; i <= n/2; i++){
+		for(int i = 2; i <= Math.sqrt(n); i++){
 			if(isFactorOf(i, n)){
 				return false;
 			}// end if	
@@ -63,10 +60,10 @@ public class PublicKeyEncryption{
 	
 	
 	/**
-	* Take two "large" primes, p and q, and return the product of p and q. 
+	* Return the value of N. 
 	*/
-	private static long getN(long p, long q){
-		return p*q;
+	pulic static void getN(){
+		return n;
 	}// end getN()
 	
 	
@@ -79,24 +76,30 @@ public class PublicKeyEncryption{
 	
 	
 	/**
-	* Return the public key, e, the least positive long that meets both of the following requirements:
+	* Set the value of the public key, e, such that it is the least positive long that meets all of the following requirements:
 	* e is greater than or equal to 3. 
 	* e is prime.
 	* e is not a factor of Phi.
 	*/
-	private static long getE(long p, long q){
+	private static void setE(long p, long q){
 		boolean foundE = false;
-		long e = 2;
 		while(foundE == false){
 			e++;
 			if(isPrime(e) && isFactorOf(e,getPhi(p,q)) != true){
 				foundE = true;
 			}// end if
-		}// end while
-		return e;		
+		}// end while		
 	}// end getE()
 	
 	
+	/**
+	* Get the value of e:
+	*/
+	private static void getE(){
+		return e;	
+	}// end getE()
+	
+		
 	/**
 	* Return a private key, d, such that (e * d) mod phi = 1.
 	* (This method uses the Extended Euclidean Algorithm (EAE).)
@@ -113,10 +116,10 @@ public class PublicKeyEncryption{
 		// Set the values of the second row in the array to e and 1 respectively:
 		euclid[1][0] = e;
 		euclid[1][1] = 1;
-		//Repeat the following process until euclid row 2 column 1 is equal to 1:
+		// Repeat the following process until euclid row 2 column 1 is equal to 1:
 		while(euclid[1][0] != 1){
 			// Find the quotient of euclid[0][0] and [1][0]
-			long quotient = (euclid[0][0] - euclid[0][0]%euclid[0][1])/euclid[1][0];
+			long quotient = euclid[0][0]/euclid[1][0];
 			// Create an array to hold the products of quotient and each of the values in euclid row 2 respectively:
 			long[] products = {euclid[1][0]*quotient,euclid[1][1]*quotient};
 			// Create an array to hold the differences of the values in euclid row 1 and the values in product[] respectively.
@@ -141,7 +144,7 @@ public class PublicKeyEncryption{
 	/**
 	* Encrypt a numeric message. 
 	*/
-	private static long encryptNumeric(long number, long publicKeyE, long publicKeyN){
+	public static long encryptNumeric(long number, long publicKeyE, long publicKeyN){
 		return largePowerMod(number, publicKeyE, publicKeyN);
 	}// end encryptNumeric()
 	
@@ -149,7 +152,7 @@ public class PublicKeyEncryption{
 	/**
 	* Decrypt a numeric message. 
 	*/
-	private static long decryptNumeric(long number, long privateKeyD, long publicKeyN){
+	public static long decryptNumeric(long number, long privateKeyD, long publicKeyN){
 		return largePowerMod(number, privateKeyD, publicKeyN);
 	}// end decryptNumeric()
 
@@ -177,14 +180,15 @@ public class PublicKeyEncryption{
 	/**
 	* Take a String, and transform it to a long. 
 	*/
-	private static String stringToLong(String s){
+	private static long stringToLong(String s){
 		// Create an empty String, numberString:
 		String numberString = "";
 		// For each character in s, append it's ASCII representation to the end of numberString:
 		for(int i = 0; i <= s.length() - 1; i++){
 			numberString = numberString + toAscii(s.charAt(i));
 		}// end for i	
-		return numberString;
+		long num = Long.parseLong(numberString);
+		return num;
 	}// end stringToLong()
 	
 	
@@ -284,9 +288,11 @@ public class PublicKeyEncryption{
 		
 		// Test for stringToLong() method:
 		System.out.println("Test for stringToLong() method:");
-		String s = "Hello, World";
+		String s = "Hello";
 		System.out.printf("%s: %s\n", s, stringToLong(s));
 		System.out.println();
+		
+		System.out.println((char)100);
 		
 	}// end main()
 	
