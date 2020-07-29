@@ -4,26 +4,31 @@ import java.util.*;
 /*
 
 Hunter CS Program
-PublicKeyEncryption() Class
+Public Key Encryption Project
+Daniel Moscoe, Sangmin Pak, and Jonathan Swotinsky
+
+Full Code
+
+Note: 
+The methods used in this program to determine the values of n, Phi, e, and d, as
+well as the method for encrypting and decrypting numeric messages are based on the 
+RSA algorithm described in the you tube video provided by Mike Zamansky and accessible
+at the following site:
+
+https://www.youtube.com/watch?v=Z8M2BTscoD4&amp;list=WL&amp;index=76&amp;t=356s
 
 */
 
 
 public class PublicKeyEncryption{
     
-	////////////////////Instance Variables////////////////////
+	////////////////////Variables////////////////////
 	
-	private static long p = 229; //50th prime number
-	private static long q = 523; //99th prime number
-	private static long n = p * q;
-	private static long e = null;
-    
-	
-	////////////////////Constructors////////////////////
-	
-    
-	
-	
+	private static long p = 229; // 50th prime number.  (Any large prime number could be selected)
+	private static long q = 523; // 99th prime number.  (Any large prime number could be selected)
+	private static long e = 2; // Set the initial value of e to 2.  The setE() method will change this value to a value that is acceptable for the RSA algorithm. 
+    private static long n = p * q; // Set n equal to the product of p and q.
+		
 	////////////////////Methods////////////////////
 	
 	/**
@@ -60,9 +65,9 @@ public class PublicKeyEncryption{
 	
 	
 	/**
-	* Return the value of N. 
+	* Return the value of n. 
 	*/
-	pulic static void getN(){
+	public static long getN(){
 		return n;
 	}// end getN()
 	
@@ -95,7 +100,9 @@ public class PublicKeyEncryption{
 	/**
 	* Get the value of e:
 	*/
-	private static void getE(){
+	public static long getE(){
+		e = 2;
+		setE(p,q);
 		return e;	
 	}// end getE()
 	
@@ -107,7 +114,7 @@ public class PublicKeyEncryption{
 	private static long getD(long p, long q){
 		// Establish variables:
 		long phi = getPhi(p,q);
-		long e = getE(p,q);		
+		e = getE();		
 		// Construct a 2D Array to walk through the steps of the EAE: 
 		long[][] euclid = new long[2][2];
 		// Set the values of the first row in the array to phi:
@@ -142,20 +149,12 @@ public class PublicKeyEncryption{
 	
 	
 	/**
-	* Encrypt a numeric message. 
+	* Apply the public key, e, to encrypt a message or the private key, d, to decrypt a message. 
 	*/
-	public static long encryptNumeric(long number, long publicKeyE, long publicKeyN){
-		return largePowerMod(number, publicKeyE, publicKeyN);
-	}// end encryptNumeric()
+	public static long applyKey(long message, long eOrD, long n){
+		return largePowerMod(message, eOrD, n);
+	}// end applyKey()
 	
-	
-	/**
-	* Decrypt a numeric message. 
-	*/
-	public static long decryptNumeric(long number, long privateKeyD, long publicKeyN){
-		return largePowerMod(number, privateKeyD, publicKeyN);
-	}// end decryptNumeric()
-
 		
 	/**
 	* Take a character, and return its ASCII number as a 3-digit string. 
@@ -193,7 +192,7 @@ public class PublicKeyEncryption{
 	
 	
 	/**
-	* main
+	* main 
 	*/
 	public static void main(String[] args){
 		
@@ -226,7 +225,7 @@ public class PublicKeyEncryption{
 		System.out.println("Test for getN() method:");
 		System.out.printf("p = %d\n", p);
 		System.out.printf("q = %d\n", q);
-		System.out.printf("n = %d\n", getN(p,q));	
+		System.out.printf("n = %d\n", getN());	
 		System.out.println();
 		
 		
@@ -238,16 +237,15 @@ public class PublicKeyEncryption{
 		System.out.println();
 		
 		
-		// Test for getE() method:
+		// Test for setE() and getE() method:
 		System.out.println("Test for getE() method:");
 		System.out.printf("Phi = %d\n", getPhi(p,q));
-		System.out.printf("e = %d\n", getE(p,q));	
+		System.out.printf("e = %d\n", getE());	
 		System.out.println();
 		
 		
 		// Test for getD() method:
 		System.out.println("Test for getD() method:");
-		long e = getE(p,q);
 		long d = getD(p,q);
 		long Phi = getPhi(p,q);
 		System.out.printf("e = %d\n", e);
@@ -257,23 +255,18 @@ public class PublicKeyEncryption{
 		System.out.println();
 			
 		
-		// Test for encryptNumeric() and decryptNumeric() methods.
-		p = 229;
-		q = 523;
-		long publicKeyN = getN(p,q);
-		long publicKeyE = getE(p,q);
-		long messageToEncrypt = 150;
-		System.out.printf("Test for encryptNumeric (assume p = %d and q = %d):\n",p,q);
-		System.out.printf("Public key: n = %d, e= %d\n",publicKeyN, publicKeyE);
-		System.out.printf("Message to encrypt: %d\n",messageToEncrypt);
-		System.out.printf("Encrypted message: %d\n\n",encryptNumeric(messageToEncrypt, publicKeyE, publicKeyN));
+		// Test for applyKey() method with both encryption and decryption.
+		long message = 150;
+		System.out.printf("Test for encryption (assume p = %d and q = %d):\n",p,q);
+		System.out.printf("Public key: n = %d, e = %d\n", n, e);
+		System.out.printf("Message to encrypt: %d\n", message);
+		System.out.printf("Encrypted message: %d\n\n",applyKey(message, e, n));
 		
-		long privateKeyD = getD(p,q);
-		long messageToDecrypt = 72019;
-		System.out.printf("Test for decryptNumeric (assume p = %d and q = %d):\n",p,q);
-		System.out.printf("Private key: n = %d, d= %d\n",publicKeyN, privateKeyD);
-		System.out.printf("Message to decrypt: %d\n",messageToDecrypt);
-		System.out.printf("Decrypted message: %d\n\n",decryptNumeric(messageToDecrypt, privateKeyD, publicKeyN));
+		message = 72019;
+		System.out.printf("Test for decryptNumeric (assume p = %d and q = %d):\n", p, q);
+		System.out.printf("Private key: n = %d, d = %d\n", n, d);
+		System.out.printf("Message to decrypt: %d\n", message);
+		System.out.printf("Decrypted message: %d\n\n", applyKey(message, d, n));
 		
 		
 		// Test for toAscii() method:
@@ -292,8 +285,11 @@ public class PublicKeyEncryption{
 		System.out.printf("%s: %s\n", s, stringToLong(s));
 		System.out.println();
 		
+		// Test for converting an ASCII number to a char: 
+		System.out.println("Test for converting an ASCII number to a char:");
+		System.out.printf("The character that corresponds to ASCII number %d is...",100);
 		System.out.println((char)100);
 		
 	}// end main()
 	
-}// end LList class
+}// end PublicKeyEncryption() class
